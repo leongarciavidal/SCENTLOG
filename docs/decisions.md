@@ -27,3 +27,5 @@ A short log of the important choices and why they were made.
 **Cache Components disabled for now.** The template enables `cacheComponents`. We turned it off to keep the rendering model simple while the core features are built. We will revisit it in Milestone 7 (performance).
 
 **Database tests.** Run with pgTAP (`npm run db:test`) against the local Supabase stack. They cover RLS, constraints and triggers.
+
+**Explicit privileges on every table.** New Supabase projects do not grant table privileges to `anon` / `authenticated` automatically, and the first deploy failed with `permission denied`. Since migration `20261123120000_explicit_grants.sql`, every privilege is granted explicitly. Every future table must grant its own privileges in its migration. RLS still decides which rows each user can access.
