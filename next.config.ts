@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  poweredByHeader: false,
+  // Tailwind CSS v4 is compiled by its Turbopack loader.
   turbopack: {
     rules: {
       "*.css": {
@@ -12,6 +14,12 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  images: {
+    remotePatterns: [
+      // Public files stored in a hosted Supabase project's Storage.
+      { protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/**" },
+    ],
+  },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

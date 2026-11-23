@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SCENTLOG
 
-## Getting Started
+_A diary of fragrance._ A social platform for perfume lovers.
 
-First, run the development server:
+## Requirements
+
+- Node.js 22 LTS — https://nodejs.org
+- Git
+- Docker Desktop (only for running Supabase locally) — https://www.docker.com/products/docker-desktop
+
+## First-time setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url> scentlog
+cd scentlog
+npm install
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Option A — Local Supabase (recommended for development)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run db:start      # starts Postgres, Auth and Storage in Docker; prints the keys
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `API_URL` → `NEXT_PUBLIC_SUPABASE_URL` and `PUBLISHABLE_KEY` → `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` into `.env.local`. Migrations and `supabase/seed.sql` are applied automatically.
 
-## Learn More
+### Option B — Hosted Supabase project
 
-To learn more about Next.js, take a look at the following resources:
+1. Create a project at https://supabase.com/dashboard.
+2. In **Project Settings → API Keys**, copy the Project URL and the **Publishable** key into `.env.local`.
+3. Link the project and apply migrations:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npx supabase login
+   npx supabase link --project-ref <your-project-ref>
+   npm run db:push
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Never put the **secret** key in `.env.local` with a `NEXT_PUBLIC_` prefix, and never commit `.env.local`.
 
-## Deploy on Vercel
+## Everyday commands
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Command            | What it does                                                               |
+| ------------------ | -------------------------------------------------------------------------- |
+| `npm run dev`      | Start the app at http://localhost:3000                                     |
+| `npm run check`    | Type check + lint + format check                                           |
+| `npm run build`    | Production build                                                           |
+| `npm run db:reset` | Rebuild the **local** database from migrations + seed (deletes local data) |
+| `npm run db:test`  | Run database security tests (pgTAP)                                        |
+| `npm run db:types` | Regenerate `src/types/database.ts` after a schema change                   |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project structure
+
+```
+src/app/[locale]/     pages (one URL tree per language: /en, /es)
+src/components/       ui/ (primitives), layout/, fragrance/
+src/features/         data access + logic per domain (fragrances, reviews…)
+src/i18n/             language routing; src/messages/ holds the texts
+src/lib/supabase/     Supabase clients (browser, server, proxy)
+src/proxy.ts          runs before each request: language + session refresh
+supabase/migrations/  versioned database changes
+supabase/tests/       database tests
+docs/decisions.md     why things are built the way they are
+```

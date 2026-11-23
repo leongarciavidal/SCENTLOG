@@ -1,0 +1,73 @@
+{
+  "Metadata": {
+    "title": "SCENTLOG — A diary of fragrance",
+    "description": "Track the fragrances you own, test and want. Rate them, review them and follow people whose taste you trust."
+  },
+  "Common": {
+    "skipToContent": "Skip to content",
+    "brandTagline": "A diary of fragrance."
+  },
+  "Nav": {
+    "label": "Main",
+    "catalogue": "Catalogue",
+    "reviews": "Reviews",
+    "language": "Language"
+  },
+  "Home": {
+    "heroEyebrow": "A diary of fragrance",
+    "heroTitle": "Every scent you have worn, <em>remembered.</em>",
+    "heroBody": "Keep track of what you own, what you have tested and what you are saving for. Rate it, write about it, and see what the people you follow are wearing.",
+    "heroCta": "Browse the catalogue",
+    "pillarsTitle": "How it works",
+    "pillars": {
+      "log": {
+        "title": "Log",
+        "body": "Every bottle on your shelf, every blotter you tested, every scent on your wishlist — and the ones you finished to the last drop."
+      },
+      "rate": {
+        "title": "Rate",
+        "body": "Half-star ratings, with optional notes on longevity, projection, sillage, versatility and value."
+      },
+      "collect": {
+        "title": "Collect",
+        "body": "Lists for everything: your signature rotation, the best vetivers, winter evenings. Public or just for you."
+      },
+      "follow": {
+        "title": "Follow",
+        "body": "Follow noses you trust. See their collections, their top four and what they reached for today."
+      }
+    },
+    "catalogueEyebrow": "The catalogue",
+    "catalogueTitle": "In the archive",
+    "catalogueCount": "{count, plural, one {# fragrance} other {# fragrances}}",
+    "catalogueEmpty": "The catalogue is empty. Fragrances will appear here as soon as they are added.",
+    "reviewsEyebrow": "From the community",
+    "reviewsTitle": "Recent reviews",
+    "reviewsEmpty": "No reviews yet. The first entries in the diary will appear here.",
+    "reviewBy": "by {username}",
+    "notConfigured": "Supabase is not configured. Copy .env.example to .env.local and add your project keys (see README).",
+    "loadError": "The catalogue could not be loaded right now. Please try again in a moment."
+  },
+  "Fragrance": {
+    "notRated": "Not yet rated",
+    "ratingLabel": "Rated {rating} out of 5",
+    "ratingCount": "{count, plural, one {# rating} other {# ratings}}",
+    "concentration": {
+      "edc": "Eau de Cologne",
+      "edt": "Eau de Toilette",
+      "edp": "Eau de Parfum",
+      "parfum": "Parfum",
+      "extrait": "Extrait de Parfum",
+      "other": "Other"
+    }
+  },
+  "Footer": {
+    "rights": "© {year} SCENTLOG",
+    "note": "Not a shop. A diary."
+  },
+  "NotFound": {
+    "title": "This page has evaporated.",
+    "body": "The page you are looking for does not exist or has been moved.",
+    "back": "Back to the homepage"
+  }
+}

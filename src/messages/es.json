@@ -1,0 +1,73 @@
+{
+  "Metadata": {
+    "title": "SCENTLOG — Un diario de perfumes",
+    "description": "Registra los perfumes que tienes, has probado y deseas. Puntúalos, reséñalos y sigue a personas cuyo gusto te inspira."
+  },
+  "Common": {
+    "skipToContent": "Saltar al contenido",
+    "brandTagline": "Un diario de perfumes."
+  },
+  "Nav": {
+    "label": "Principal",
+    "catalogue": "Catálogo",
+    "reviews": "Reseñas",
+    "language": "Idioma"
+  },
+  "Home": {
+    "heroEyebrow": "Un diario de perfumes",
+    "heroTitle": "Cada perfume que has llevado, <em>recordado.</em>",
+    "heroBody": "Lleva el registro de lo que tienes, lo que has probado y lo que estás deseando. Puntúalo, escribe sobre ello y descubre qué llevan las personas a las que sigues.",
+    "heroCta": "Explorar el catálogo",
+    "pillarsTitle": "Cómo funciona",
+    "pillars": {
+      "log": {
+        "title": "Registra",
+        "body": "Cada frasco de tu estantería, cada mouillette que probaste, cada perfume de tu lista de deseos — y los que terminaste hasta la última gota."
+      },
+      "rate": {
+        "title": "Puntúa",
+        "body": "Puntuaciones con medias estrellas y notas opcionales sobre duración, proyección, estela, versatilidad y relación calidad-precio."
+      },
+      "collect": {
+        "title": "Colecciona",
+        "body": "Listas para todo: tu rotación esencial, los mejores vetiver, las noches de invierno. Públicas o solo para ti."
+      },
+      "follow": {
+        "title": "Sigue",
+        "body": "Sigue a narices en las que confías. Mira sus colecciones, su top cuatro y qué eligieron hoy."
+      }
+    },
+    "catalogueEyebrow": "El catálogo",
+    "catalogueTitle": "En el archivo",
+    "catalogueCount": "{count, plural, one {# perfume} other {# perfumes}}",
+    "catalogueEmpty": "El catálogo está vacío. Los perfumes aparecerán aquí en cuanto se añadan.",
+    "reviewsEyebrow": "De la comunidad",
+    "reviewsTitle": "Reseñas recientes",
+    "reviewsEmpty": "Todavía no hay reseñas. Las primeras entradas del diario aparecerán aquí.",
+    "reviewBy": "por {username}",
+    "notConfigured": "Supabase no está configurado. Copia .env.example como .env.local y añade las claves de tu proyecto (ver README).",
+    "loadError": "No se ha podido cargar el catálogo. Inténtalo de nuevo en un momento."
+  },
+  "Fragrance": {
+    "notRated": "Sin puntuar",
+    "ratingLabel": "Puntuación: {rating} de 5",
+    "ratingCount": "{count, plural, one {# valoración} other {# valoraciones}}",
+    "concentration": {
+      "edc": "Eau de Cologne",
+      "edt": "Eau de Toilette",
+      "edp": "Eau de Parfum",
+      "parfum": "Parfum",
+      "extrait": "Extrait de Parfum",
+      "other": "Otra"
+    }
+  },
+  "Footer": {
+    "rights": "© {year} SCENTLOG",
+    "note": "No es una tienda. Es un diario."
+  },
+  "NotFound": {
+    "title": "Esta página se ha evaporado.",
+    "body": "La página que buscas no existe o ha cambiado de dirección.",
+    "back": "Volver a la portada"
+  }
+}
