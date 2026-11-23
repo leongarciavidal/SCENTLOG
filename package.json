@@ -16,7 +16,7 @@
     "db:reset": "supabase db reset",
     "db:test": "supabase test db",
     "db:types": "supabase gen types typescript --local > src/types/database.ts",
-    "db:push": "supabase db push"
+    "db:push": "supabase db push --remote"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

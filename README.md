@@ -34,7 +34,7 @@ Copy `API_URL` → `NEXT_PUBLIC_SUPABASE_URL` and `PUBLISHABLE_KEY` → `NEXT_PU
    ```bash
    npx supabase login
    npx supabase link --project-ref <your-project-ref>
-   npm run db:push
+   npm run db:push -- --include-seed
    ```
 
 Never put the **secret** key in `.env.local` with a `NEXT_PUBLIC_` prefix, and never commit `.env.local`.
