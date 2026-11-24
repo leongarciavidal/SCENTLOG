@@ -21,7 +21,10 @@
     "fragrances": "Perfumes",
     "brands": "Marcas",
     "collection": "Mi colección",
-    "feed": "Actividad"
+    "feed": "Actividad",
+    "lists": "Listas",
+    "discover": "Descubrir",
+    "myLists": "Mis listas"
   },
   "Home": {
     "heroEyebrow": "Un diario de perfumes",
@@ -74,7 +77,8 @@
   },
   "Footer": {
     "rights": "© {year} SCENTLOG",
-    "note": "No es una tienda. Es un diario."
+    "note": "No es una tienda. Es un diario.",
+    "explore": "Explorar"
   },
   "NotFound": {
     "title": "Esta página se ha evaporado.",
@@ -123,7 +127,9 @@
       "dateInvalid": "Elige una fecha válida que no sea futura.",
       "favoritesDuplicate": "Cada perfume solo puede aparecer una vez.",
       "reviewTooLong": "Usa como máximo 10.000 caracteres.",
-      "commentTooLong": "Usa como máximo 2.000 caracteres."
+      "commentTooLong": "Usa como máximo 2.000 caracteres.",
+      "titleTooLong": "Usa como máximo 120 caracteres.",
+      "descriptionTooLong": "Usa como máximo 2.000 caracteres."
     },
     "success": {
       "checkEmail": "Casi listo. Te hemos enviado un enlace de confirmación por email: ábrelo para activar tu cuenta.",
@@ -133,7 +139,8 @@
       "diarySaved": "Guardado en tu diario.",
       "favoritesSaved": "Top cuatro guardado.",
       "reviewSaved": "Reseña publicada.",
-      "commentAdded": "Comentario publicado."
+      "commentAdded": "Comentario publicado.",
+      "listSaved": "Lista guardada."
     },
     "submitting": "Un momento…"
   },
@@ -200,7 +207,9 @@
     "recent": "Añadidos recientemente",
     "browseCatalogue": "Explorar el catálogo",
     "reviewsTitle": "Reseñas recientes",
-    "viewAllReviews": "Todas las reseñas"
+    "viewAllReviews": "Todas las reseñas",
+    "listsTitle": "Listas",
+    "viewAllLists": "Todas las listas"
   },
   "Settings": {
     "metaTitle": "Editar perfil",
@@ -434,7 +443,7 @@
       "finished": "terminó un frasco de <f>{fragrance}</f>"
     },
     "review": "reseñó <f>{fragrance}</f>",
-    "list": "creó una lista",
+    "list": "creó la lista <l>{title}</l>",
     "follow": "empezó a seguir a <u>{user}</u>",
     "you": "Tú",
     "empty": "Tu feed está tranquilo. Sigue a personas para ver qué llevan.",
@@ -449,7 +458,83 @@
         "finished": "terminaste un frasco de <f>{fragrance}</f>"
       },
       "review": "reseñaste <f>{fragrance}</f>",
-      "follow": "empezaste a seguir a <u>{user}</u>"
+      "follow": "empezaste a seguir a <u>{user}</u>",
+      "list": "creaste la lista <l>{title}</l>"
     }
+  },
+  "Lists": {
+    "metaTitle": "Listas",
+    "metaDescription": "Listas de perfumes creadas por la comunidad de SCENTLOG.",
+    "eyebrow": "Seleccionadas por la comunidad",
+    "title": "Listas",
+    "popular": "Listas populares",
+    "recent": "Creadas recientemente",
+    "empty": "Todavía no hay listas públicas.",
+    "new": "Nueva lista",
+    "newTitle": "Crea una lista",
+    "newIntro": "Tu rotación esencial, los mejores vetiver, perfumes para días de lluvia… Ponle un título y después añade perfumes.",
+    "titleLabel": "Título",
+    "descriptionLabel": "Descripción",
+    "descriptionHint": "Opcional. Hasta 2.000 caracteres.",
+    "public": "Lista pública",
+    "publicHint": "Cualquiera puede verla. Las listas privadas solo las ves tú.",
+    "ranked": "Lista numerada",
+    "rankedHint": "Muestra la posición de cada perfume (1, 2, 3…).",
+    "create": "Crear lista",
+    "save": "Guardar datos",
+    "by": "Una lista de {name}",
+    "count": "{count, plural, =0 {Vacía} one {# perfume} other {# perfumes}}",
+    "likes": "{count, plural, =0 {Sin likes} one {# like} other {# likes}}",
+    "like": "Me gusta la lista",
+    "unlike": "Quitar me gusta",
+    "private": "Privada",
+    "edit": "Editar lista",
+    "editTitle": "Editar lista",
+    "viewList": "Ver lista",
+    "delete": "Borrar lista",
+    "deleteConfirm": "¿Borrar esta lista? No se puede deshacer.",
+    "items": "Perfumes",
+    "emptyList": "Esta lista está vacía.",
+    "emptyListOwn": "Esta lista está vacía. Añade perfumes desde el editor o desde la ficha de cualquier perfume.",
+    "addTitle": "Añadir perfumes",
+    "searchPlaceholder": "Busca por nombre o casa…",
+    "add": "Añadir",
+    "added": "Añadido",
+    "remove": "Quitar",
+    "moveUp": "Subir",
+    "moveDown": "Bajar",
+    "noResults": "No se han encontrado perfumes.",
+    "cover": "Imagen de portada",
+    "coverHint": "Opcional. JPG, PNG o WebP. Se muestra a lo ancho en la página de la lista.",
+    "coverUpload": "Subir portada",
+    "coverChange": "Cambiar portada",
+    "coverRemove": "Quitar portada",
+    "uploading": "Subiendo…",
+    "addToList": "Añadir a una lista",
+    "addToListTitle": "Tus listas",
+    "noLists": "Todavía no tienes listas.",
+    "createWith": "Nueva lista con este perfume",
+    "inList": "En esta lista",
+    "userListsTitle": "Listas de {name}",
+    "userListsTitleOwn": "Tus listas",
+    "userListsEmpty": "Todavía no hay listas.",
+    "updated": "Actualizada {date}"
+  },
+  "Discover": {
+    "metaTitle": "Descubrir",
+    "metaDescription": "Perfumes populares y mejor valorados, reseñas recientes y listas de la comunidad de SCENTLOG.",
+    "eyebrow": "Descubrir",
+    "title": "Lo que lleva la comunidad",
+    "popular": "Populares esta temporada",
+    "popularHint": "Los más registrados en diarios",
+    "topRated": "Mejor valorados",
+    "topRatedHint": "Media de la comunidad, mínimo {count, plural, one {# valoración} other {# valoraciones}}",
+    "reviews": "Reseñas recientes",
+    "lists": "Listas populares",
+    "houses": "Casas",
+    "viewAll": "Ver todo",
+    "noRated": "Todavía no se ha valorado nada.",
+    "noReviews": "Todavía no hay reseñas.",
+    "noLists": "Todavía no hay listas públicas."
   }
 }

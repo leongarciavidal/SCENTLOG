@@ -467,7 +467,10 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "feed_events":
+            "add_list_item":
+{ Args: { "p_fragrance_id": string,"p_list_id": string }; Returns: undefined
+                           },
+"feed_events":
 { Args: { "before_id"?: number,"page_size"?: number }; Returns: {
               "actor_id": string,
 "created_at": string,
@@ -496,6 +499,9 @@ isOneToOne: false
                            },
 "refresh_fragrance_diary_stats":
 { Args: { "target": string }; Returns: undefined
+                           },
+"reorder_list_items":
+{ Args: { "p_fragrance_ids": (string)[],"p_list_id": string }; Returns: undefined
                            },
 "set_profile_favorites":
 { Args: { "fragrance_ids": (string)[] }; Returns: undefined

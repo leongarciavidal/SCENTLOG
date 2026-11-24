@@ -11,6 +11,8 @@ import { USERNAME_PATTERN } from "@/features/auth/constants";
 import { getCurrentUser } from "@/features/auth/session";
 import { DiaryEntryMeta } from "@/features/diary/components/DiaryEntryMeta";
 import { getRecentEntries } from "@/features/diary/queries";
+import { ListCard } from "@/features/lists/components/ListCard";
+import { getUserLists } from "@/features/lists/queries";
 import { ReviewCard } from "@/features/reviews/components/ReviewCard";
 import { getLikedReviewIds, getUserReviews } from "@/features/reviews/queries";
 import { FollowButton } from "@/features/social/components/FollowButton";
@@ -53,7 +55,7 @@ export default async function ProfilePage({ params }: Props) {
   const profile = await loadProfile(username);
   if (!profile) notFound();
 
-  const [t, format, viewer, stats, favorites, recent, reviews] = await Promise.all([
+  const [t, format, viewer, stats, favorites, recent, reviews, lists] = await Promise.all([
     getTranslations("Profile"),
     getFormatter(),
     getCurrentUser(),
@@ -61,6 +63,7 @@ export default async function ProfilePage({ params }: Props) {
     getProfileFavorites(profile.id),
     getRecentEntries(profile.id, 8),
     getUserReviews(profile.id),
+    getUserLists(profile.id),
   ]);
   const [following, likedReviewIds] = await Promise.all([
     isFollowing(viewer?.id, profile.id),
@@ -129,7 +132,7 @@ export default async function ProfilePage({ params }: Props) {
                 key={key}
                 label={t(`stats.${key}`)}
                 value={stats[key as keyof ProfileStats]}
-                href={key === "lists" ? undefined : `/${profile.username}/${key}`}
+                href={`/${profile.username}/${key}`}
               />
             ))}
           </div>
@@ -185,6 +188,30 @@ export default async function ProfilePage({ params }: Props) {
           ) : null}
         </Container>
       </section>
+
+      {/* --------------------------------------------------------------- Lists */}
+      {lists.length > 0 ? (
+        <section aria-labelledby="profile-lists" className="border-t border-line">
+          <Container className="py-16 sm:py-20">
+            <div className="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
+              <h2 id="profile-lists" className="eyebrow">
+                {t("listsTitle")}
+              </h2>
+              <Link
+                href={`/${profile.username}/lists`}
+                className="link-underline text-xs text-paper-muted"
+              >
+                {t("viewAllLists")}
+              </Link>
+            </div>
+            <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {lists.slice(0, 3).map((list) => (
+                <ListCard key={list.id} list={list} showAuthor={false} />
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       {/* ------------------------------------------------------------- Reviews */}
       {reviews.length > 0 ? (

@@ -66,7 +66,8 @@ export async function getFeed(beforeId?: number) {
       target:profiles!activity_events_target_user_id_fkey ( username, display_name ),
       fragrance:fragrances!activity_events_fragrance_id_fkey ( slug, name, image_url, concentration, release_year, brand:brands!inner ( name ), family:fragrance_families ( slug ) ),
       entry:user_fragrances!activity_events_user_fragrance_id_fkey ( status, rating ),
-      review:reviews!activity_events_review_id_fkey ( id, body )
+      review:reviews!activity_events_review_id_fkey ( id, body ),
+      list:lists!activity_events_list_id_fkey ( id, title )
     `,
     );
   if (error) throw new Error(error.message);

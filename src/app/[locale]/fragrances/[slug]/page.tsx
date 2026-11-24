@@ -10,6 +10,8 @@ import { buttonClasses } from "@/components/ui/Button";
 import { getCurrentProfile } from "@/features/auth/session";
 import { DiaryPanel } from "@/features/diary/components/DiaryPanel";
 import { getMyDiaryEntry } from "@/features/diary/queries";
+import { AddToListMenu } from "@/features/lists/components/AddToListMenu";
+import { getMyListsFor } from "@/features/lists/queries";
 import { ReviewCard } from "@/features/reviews/components/ReviewCard";
 import { ReviewEditor } from "@/features/reviews/components/ReviewEditor";
 import { getFragranceReviews, getLikedReviewIds, getMyReview } from "@/features/reviews/queries";
@@ -57,7 +59,7 @@ export default async function FragrancePage({ params }: Props) {
     getCurrentProfile(),
     getFragranceReviews(fragrance.id),
   ]);
-  const [moreFromBrand, diaryEntry, td, tReviews, myReview, likedIds] = await Promise.all([
+  const [moreFromBrand, diaryEntry, td, tReviews, myReview, likedIds, myLists] = await Promise.all([
     getMoreFromBrand(fragrance.brand_id, [fragrance.id, ...editions.map((e) => e.id)]),
     profile ? getMyDiaryEntry(profile.id, fragrance.id) : null,
     getTranslations("Diary"),
@@ -67,6 +69,7 @@ export default async function FragrancePage({ params }: Props) {
       profile?.id,
       reviews.map((r) => r.id),
     ),
+    profile ? getMyListsFor(profile.id, fragrance.id) : [],
   ]);
 
   const format = await getFormatter();
@@ -145,6 +148,8 @@ export default async function FragrancePage({ params }: Props) {
                 {t("inDiaries", { count: fragrance.diary_count })}
               </span>
             </div>
+
+            {profile ? <AddToListMenu fragranceId={fragrance.id} lists={myLists} /> : null}
 
             {description ? (
               <p className="max-w-2xl font-serif text-2xl leading-snug text-paper/90">

@@ -48,8 +48,17 @@ export async function FeedItem({ event, viewerId }: { event: FeedEvent; viewerId
       ),
     };
     sentence = isSelf ? t.rich("self.follow", values) : t.rich("follow", values);
-  } else if (event.type === "list") {
-    sentence = t("list");
+  } else if (event.type === "list" && event.list) {
+    const list = event.list;
+    const values = {
+      title: list.title,
+      l: (chunks: React.ReactNode) => (
+        <Link href={`/lists/${list.id}`} className={linkClass}>
+          {chunks}
+        </Link>
+      ),
+    };
+    sentence = isSelf ? t.rich("self.list", values) : t.rich("list", values);
   }
   if (!sentence) return null;
 

@@ -13,8 +13,15 @@ export async function latestEmailLink(to: string, subjectIncludes?: RegExp): Pro
     const search = await fetch(
       `${MAILPIT}/api/v1/search?query=${encodeURIComponent(`to:"${to}"`)}`,
     );
-    const { messages } = (await search.json()) as { messages: { ID: string; Subject: string }[] };
-    const match = messages.find((m) => !subjectIncludes || subjectIncludes.test(m.Subject));
+    const { messages } = (await search.json()) as {
+      messages: { ID: string; Subject: string; To: { Address: string }[] }[];
+    };
+    // Mailpit's search is fuzzy, so check the exact recipient ourselves.
+    const match = messages.find(
+      (m) =>
+        m.To.some((recipient) => recipient.Address.toLowerCase() === to.toLowerCase()) &&
+        (!subjectIncludes || subjectIncludes.test(m.Subject)),
+    );
     if (match) {
       const message = await fetch(`${MAILPIT}/api/v1/message/${match.ID}`);
       const { HTML, Text } = (await message.json()) as { HTML: string; Text: string };

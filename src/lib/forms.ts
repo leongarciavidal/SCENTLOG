@@ -28,6 +28,8 @@ export type ErrorCode =
   | "favoritesDuplicate"
   | "reviewTooLong"
   | "commentTooLong"
+  | "titleTooLong"
+  | "descriptionTooLong"
   | "unknown";
 
 /** Codes for success messages → Forms.success */
@@ -39,7 +41,8 @@ export type SuccessCode =
   | "diarySaved"
   | "favoritesSaved"
   | "reviewSaved"
-  | "commentAdded";
+  | "commentAdded"
+  | "listSaved";
 
 /** State returned by every form Server Action (used with React's useActionState). */
 export type FormState<Field extends string = string> = {

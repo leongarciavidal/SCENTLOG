@@ -260,3 +260,32 @@ export async function getPerfumerFragrances(perfumerId: string) {
     .order("release_year", { ascending: false, nullsFirst: false });
   return data ?? [];
 }
+
+// ---------------------------------------------------------------------------
+// Discovery
+// ---------------------------------------------------------------------------
+
+/** Most logged fragrances (diary entries of any status). */
+export async function getPopularFragrances(limit = 8) {
+  const { data } = await cards(await createClient())
+    .gt("diary_count", 0)
+    .order("diary_count", { ascending: false })
+    .order("rating_avg", { ascending: false, nullsFirst: false })
+    .limit(limit);
+  return data ?? [];
+}
+
+/**
+ * Best community average among fragrances with at least `minRatings` ratings,
+ * so a single 5-star rating cannot top the chart. Raise the threshold as the
+ * community grows.
+ */
+export const TOP_RATED_MIN_RATINGS = 1;
+export async function getTopRatedFragrances(limit = 8, minRatings = TOP_RATED_MIN_RATINGS) {
+  const { data } = await cards(await createClient())
+    .gte("rating_count", minRatings)
+    .order("rating_avg", { ascending: false, nullsFirst: false })
+    .order("rating_count", { ascending: false })
+    .limit(limit);
+  return data ?? [];
+}

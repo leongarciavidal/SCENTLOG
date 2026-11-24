@@ -87,3 +87,19 @@ A short log of the important choices and why they were made.
 **Your own feed items use second-person phrasing** ("Tú reseñaste…") so Spanish grammar stays correct.
 
 **Comments can be deleted only by their author** (RLS). Moderation tools and reporting are planned for launch preparation.
+
+## 2026-11 — Milestone 6 (lists and discovery)
+
+**List items change only through RPCs.** `add_list_item` appends at the end and does nothing if the item is already there. `reorder_list_items` replaces the whole order atomically and requires every item exactly once. The deferred unique constraint on `(list_id, position)` lets positions swap inside one transaction. Both functions run as the caller, so RLS keeps lists owner-only.
+
+**Private lists** are invisible to everyone else, enforced by RLS: list page → 404, items, likes, activity. The editor also returns 404 to non-owners, so it does not reveal that the list exists.
+
+**List covers.** A list can have an uploaded image (`list-covers/<uid>/<list id>-<ts>`). Otherwise it gets an editorial composition built from its own content: the title, the first fragrance names and a strip of their family tones. No stock imagery.
+
+**"Add to list" on fragrance pages.** A checkbox per list with optimistic updates, plus "new list with this fragrance" (`/lists/new?add=<id>`).
+
+**Discover.** It shows the most logged fragrances (topped up from the catalogue while the community is small), the highest rated (minimum ratings via `TOP_RATED_MIN_RATINGS`, to raise as the community grows), popular lists, recent reviews and houses.
+
+**Navigation.** On phones the header shows only Discover and Fragrances; every section is also linked in the footer.
+
+**E2E reliability.** The test email helper now checks the exact recipient, because Mailpit's search is fuzzy.
