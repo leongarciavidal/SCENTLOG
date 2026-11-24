@@ -63,3 +63,12 @@ supabase/migrations/  versioned database changes
 supabase/tests/       database tests
 docs/decisions.md     why things are built the way they are
 ```
+
+## Supabase Auth settings (hosted project)
+
+In the Supabase dashboard → **Authentication → URL Configuration**:
+
+- **Site URL:** `http://localhost:3000` (change to the real domain at launch)
+- **Redirect URLs:** add `http://localhost:3000/**`
+
+Local test emails can be read in Mailpit at http://127.0.0.1:54324.

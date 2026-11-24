@@ -11,7 +11,13 @@
     "label": "Main",
     "catalogue": "Catalogue",
     "reviews": "Reviews",
-    "language": "Language"
+    "language": "Language",
+    "signIn": "Sign in",
+    "join": "Create account",
+    "account": "Account",
+    "profile": "Profile",
+    "settings": "Settings",
+    "signOut": "Sign out"
   },
   "Home": {
     "heroEyebrow": "A diary of fragrance",
@@ -69,5 +75,131 @@
     "title": "This page has evaporated.",
     "body": "The page you are looking for does not exist or has been moved.",
     "back": "Back to the homepage"
+  },
+  "Forms": {
+    "labels": {
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "newPassword": "New password",
+      "confirmPassword": "Repeat new password",
+      "displayName": "Display name",
+      "bio": "Biography",
+      "locale": "Preferred language"
+    },
+    "hints": {
+      "username": "3–30 characters: lowercase letters, numbers and underscores.",
+      "password": "At least 8 characters.",
+      "displayName": "Optional. How your name appears on your profile.",
+      "bio": "Optional. Up to 500 characters.",
+      "locale": "Used for the interface and emails."
+    },
+    "errors": {
+      "required": "This field is required.",
+      "emailInvalid": "Enter a valid email address.",
+      "usernameFormat": "Use 3–30 lowercase letters, numbers or underscores.",
+      "usernameReserved": "This username is reserved. Try another one.",
+      "usernameTaken": "This username is already taken.",
+      "passwordTooShort": "Use at least 8 characters.",
+      "passwordTooLong": "Use at most 72 characters.",
+      "passwordWeak": "This password is too easy to guess. Try a longer one.",
+      "passwordMismatch": "The passwords do not match.",
+      "samePassword": "The new password must be different from the current one.",
+      "invalidCredentials": "Email or password is incorrect.",
+      "emailNotConfirmed": "Confirm your email address first — check your inbox.",
+      "rateLimited": "Too many attempts. Please wait a few minutes and try again.",
+      "sessionExpired": "Your session has expired. Please sign in again.",
+      "displayNameTooLong": "Use at most 60 characters.",
+      "bioTooLong": "Use at most 500 characters.",
+      "avatarInvalid": "Choose a JPG, PNG or WebP image.",
+      "avatarTooLarge": "The image is too large.",
+      "unknown": "Something went wrong. Please try again."
+    },
+    "success": {
+      "checkEmail": "Almost there. We have sent a confirmation link to your email — open it to activate your account.",
+      "resetEmailSent": "If an account exists for that email, a link to reset your password is on its way.",
+      "passwordUpdated": "Your password has been updated.",
+      "profileSaved": "Profile saved."
+    },
+    "submitting": "One moment…"
+  },
+  "Auth": {
+    "asideQuote": "A fragrance is a memory you can wear.",
+    "login": {
+      "metaTitle": "Sign in",
+      "eyebrow": "Welcome back",
+      "title": "Sign in",
+      "submit": "Sign in",
+      "forgot": "Forgot your password?",
+      "noAccount": "New to SCENTLOG?",
+      "createOne": "Create an account",
+      "linkError": "That link is invalid or has expired. Request a new one."
+    },
+    "signup": {
+      "metaTitle": "Create account",
+      "eyebrow": "Start your diary",
+      "title": "Create your account",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "terms": "By creating an account you agree to keep things kind and honest."
+    },
+    "forgot": {
+      "metaTitle": "Reset password",
+      "eyebrow": "Password recovery",
+      "title": "Reset your password",
+      "body": "Enter the email you signed up with and we will send you a link to choose a new password.",
+      "submit": "Send reset link",
+      "back": "Back to sign in"
+    },
+    "reset": {
+      "metaTitle": "New password",
+      "eyebrow": "Password recovery",
+      "title": "Choose a new password",
+      "submit": "Update password",
+      "noSession": "This page only works from the link in your reset email, or while signed in.",
+      "requestNew": "Request a new link",
+      "continue": "Go to your profile"
+    }
+  },
+  "Profile": {
+    "memberSince": "Member since {date}",
+    "edit": "Edit profile",
+    "stats": {
+      "owned": "Owned",
+      "tested": "Tested",
+      "wishlist": "Wishlist",
+      "finished": "Finished",
+      "reviews": "Reviews",
+      "lists": "Lists",
+      "followers": "Followers",
+      "following": "Following"
+    },
+    "topFour": "Top four",
+    "topFourEmptyOwn": "Your four favourite fragrances will appear here once your diary opens.",
+    "topFourEmpty": "No favourites chosen yet.",
+    "diary": "Diary",
+    "diaryEmptyOwn": "Your diary is empty. Logging fragrances arrives in the next update.",
+    "diaryEmpty": "Nothing in the diary yet."
+  },
+  "Settings": {
+    "metaTitle": "Edit profile",
+    "eyebrow": "Settings",
+    "title": "Edit profile",
+    "avatar": "Profile photo",
+    "avatarHint": "JPG, PNG or WebP. It will be cropped to a square.",
+    "avatarChoose": "Upload photo",
+    "avatarChange": "Change photo",
+    "avatarRemove": "Remove",
+    "avatarUploading": "Uploading…",
+    "save": "Save changes",
+    "viewProfile": "View profile",
+    "security": "Security",
+    "changePassword": "Change password",
+    "email": "Signed in as {email}"
+  },
+  "Languages": {
+    "en": "English",
+    "es": "Español"
   }
 }

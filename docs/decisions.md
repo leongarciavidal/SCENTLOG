@@ -29,3 +29,19 @@ A short log of the important choices and why they were made.
 **Database tests.** Run with pgTAP (`npm run db:test`) against the local Supabase stack. They cover RLS, constraints and triggers.
 
 **Explicit privileges on every table.** New Supabase projects do not grant table privileges to `anon` / `authenticated` automatically, and the first deploy failed with `permission denied`. Since migration `20261123120000_explicit_grants.sql`, every privilege is granted explicitly. Every future table must grant its own privileges in its migration. RLS still decides which rows each user can access.
+
+## 2026-11 — Milestone 2 (authentication and profiles)
+
+**Server Actions for every form** (sign up, sign in, profile…). Each input is validated with Zod on the server and errors come back as codes that the UI translates. The forms still work if JavaScript fails to load.
+
+**Identity on the server comes from `getClaims()`** (`features/auth/session.ts`), cached once per request. Protected pages call `requireUser()`, which redirects to `/login?next=…`. `next` only accepts relative paths, which prevents open redirects.
+
+**Email links land on `/auth/confirm`.** It handles both the default PKCE format (`?code=`) and the `token_hash` format, so we can customise the email templates later without code changes.
+
+**Username availability is checked before sign-up** for instant feedback. The unique constraint and the `handle_new_user` trigger are the real guarantee: if a race happens, the trigger assigns a safe fallback the user can change.
+
+**Avatars are resized to 512×512 in the browser** before upload. This keeps them small and under the 1 MB Server Action limit. The server still checks type and size. Files live in `avatars/<user id>/`, and old files are deleted on each change. A storage SELECT policy (owner's folder only) was added so listing and deleting work.
+
+**No account enumeration.** Sign-up and password-reset responses never reveal whether an email is registered.
+
+**Local auth mirrors production.** `supabase/config.toml` has email confirmation on and an 8-character minimum password. Confirmation emails go to Mailpit, and the e2e tests read them from there.

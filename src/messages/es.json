@@ -11,7 +11,13 @@
     "label": "Principal",
     "catalogue": "Catálogo",
     "reviews": "Reseñas",
-    "language": "Idioma"
+    "language": "Idioma",
+    "signIn": "Entrar",
+    "join": "Crear cuenta",
+    "account": "Cuenta",
+    "profile": "Perfil",
+    "settings": "Ajustes",
+    "signOut": "Cerrar sesión"
   },
   "Home": {
     "heroEyebrow": "Un diario de perfumes",
@@ -69,5 +75,131 @@
     "title": "Esta página se ha evaporado.",
     "body": "La página que buscas no existe o ha cambiado de dirección.",
     "back": "Volver a la portada"
+  },
+  "Forms": {
+    "labels": {
+      "username": "Nombre de usuario",
+      "email": "Email",
+      "password": "Contraseña",
+      "newPassword": "Nueva contraseña",
+      "confirmPassword": "Repite la nueva contraseña",
+      "displayName": "Nombre visible",
+      "bio": "Biografía",
+      "locale": "Idioma preferido"
+    },
+    "hints": {
+      "username": "De 3 a 30 caracteres: minúsculas, números y guiones bajos.",
+      "password": "Mínimo 8 caracteres.",
+      "displayName": "Opcional. Cómo aparece tu nombre en tu perfil.",
+      "bio": "Opcional. Hasta 500 caracteres.",
+      "locale": "Se usa para la interfaz y los emails."
+    },
+    "errors": {
+      "required": "Este campo es obligatorio.",
+      "emailInvalid": "Introduce un email válido.",
+      "usernameFormat": "Usa entre 3 y 30 minúsculas, números o guiones bajos.",
+      "usernameReserved": "Este nombre está reservado. Prueba con otro.",
+      "usernameTaken": "Este nombre de usuario ya está cogido.",
+      "passwordTooShort": "Usa al menos 8 caracteres.",
+      "passwordTooLong": "Usa como máximo 72 caracteres.",
+      "passwordWeak": "Esta contraseña es demasiado fácil de adivinar. Prueba una más larga.",
+      "passwordMismatch": "Las contraseñas no coinciden.",
+      "samePassword": "La nueva contraseña debe ser distinta de la actual.",
+      "invalidCredentials": "El email o la contraseña no son correctos.",
+      "emailNotConfirmed": "Primero confirma tu email: revisa tu bandeja de entrada.",
+      "rateLimited": "Demasiados intentos. Espera unos minutos y vuelve a probar.",
+      "sessionExpired": "Tu sesión ha caducado. Vuelve a entrar.",
+      "displayNameTooLong": "Usa como máximo 60 caracteres.",
+      "bioTooLong": "Usa como máximo 500 caracteres.",
+      "avatarInvalid": "Elige una imagen JPG, PNG o WebP.",
+      "avatarTooLarge": "La imagen es demasiado grande.",
+      "unknown": "Algo ha fallado. Inténtalo de nuevo."
+    },
+    "success": {
+      "checkEmail": "Casi listo. Te hemos enviado un enlace de confirmación por email: ábrelo para activar tu cuenta.",
+      "resetEmailSent": "Si existe una cuenta con ese email, te llegará un enlace para restablecer la contraseña.",
+      "passwordUpdated": "Tu contraseña se ha actualizado.",
+      "profileSaved": "Perfil guardado."
+    },
+    "submitting": "Un momento…"
+  },
+  "Auth": {
+    "asideQuote": "Un perfume es un recuerdo que se puede llevar puesto.",
+    "login": {
+      "metaTitle": "Entrar",
+      "eyebrow": "Hola de nuevo",
+      "title": "Entrar",
+      "submit": "Entrar",
+      "forgot": "¿Has olvidado tu contraseña?",
+      "noAccount": "¿Nuevo en SCENTLOG?",
+      "createOne": "Crea una cuenta",
+      "linkError": "Ese enlace no es válido o ha caducado. Solicita uno nuevo."
+    },
+    "signup": {
+      "metaTitle": "Crear cuenta",
+      "eyebrow": "Empieza tu diario",
+      "title": "Crea tu cuenta",
+      "submit": "Crear cuenta",
+      "haveAccount": "¿Ya tienes cuenta?",
+      "signIn": "Entrar",
+      "terms": "Al crear una cuenta te comprometes a ser amable y honesto."
+    },
+    "forgot": {
+      "metaTitle": "Restablecer contraseña",
+      "eyebrow": "Recuperar contraseña",
+      "title": "Restablece tu contraseña",
+      "body": "Escribe el email con el que te registraste y te enviaremos un enlace para elegir una contraseña nueva.",
+      "submit": "Enviar enlace",
+      "back": "Volver a entrar"
+    },
+    "reset": {
+      "metaTitle": "Nueva contraseña",
+      "eyebrow": "Recuperar contraseña",
+      "title": "Elige una contraseña nueva",
+      "submit": "Actualizar contraseña",
+      "noSession": "Esta página solo funciona desde el enlace del email de recuperación o con la sesión iniciada.",
+      "requestNew": "Solicitar un enlace nuevo",
+      "continue": "Ir a tu perfil"
+    }
+  },
+  "Profile": {
+    "memberSince": "Miembro desde {date}",
+    "edit": "Editar perfil",
+    "stats": {
+      "owned": "Tengo",
+      "tested": "Probados",
+      "wishlist": "Deseados",
+      "finished": "Terminados",
+      "reviews": "Reseñas",
+      "lists": "Listas",
+      "followers": "Seguidores",
+      "following": "Siguiendo"
+    },
+    "topFour": "Top cuatro",
+    "topFourEmptyOwn": "Tus cuatro perfumes favoritos aparecerán aquí cuando se abra tu diario.",
+    "topFourEmpty": "Todavía no ha elegido favoritos.",
+    "diary": "Diario",
+    "diaryEmptyOwn": "Tu diario está vacío. Registrar perfumes llega en la próxima actualización.",
+    "diaryEmpty": "Todavía no hay nada en el diario."
+  },
+  "Settings": {
+    "metaTitle": "Editar perfil",
+    "eyebrow": "Ajustes",
+    "title": "Editar perfil",
+    "avatar": "Foto de perfil",
+    "avatarHint": "JPG, PNG o WebP. Se recortará en cuadrado.",
+    "avatarChoose": "Subir foto",
+    "avatarChange": "Cambiar foto",
+    "avatarRemove": "Quitar",
+    "avatarUploading": "Subiendo…",
+    "save": "Guardar cambios",
+    "viewProfile": "Ver perfil",
+    "security": "Seguridad",
+    "changePassword": "Cambiar contraseña",
+    "email": "Sesión iniciada como {email}"
+  },
+  "Languages": {
+    "en": "English",
+    "es": "Español"
   }
 }
