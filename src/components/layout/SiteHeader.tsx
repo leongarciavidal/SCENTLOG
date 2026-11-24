@@ -11,7 +11,8 @@ import { Wordmark } from "./Wordmark";
 
 /**
  * Only links to sections that exist are shown. Discover, Lists, etc. are
- * added as their milestones ship.
+ * added as their milestones ship. The language switcher lives in the footer
+ * on small screens to keep the header uncluttered.
  */
 export async function SiteHeader() {
   const t = await getTranslations("Nav");
@@ -21,19 +22,19 @@ export async function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-line/80 bg-ink/85 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between gap-6">
         <Wordmark />
-        <div className="flex items-center gap-6 sm:gap-8">
-          <nav aria-label={t("label")} className="hidden items-center gap-8 md:flex">
+        <div className="flex items-center gap-5 sm:gap-8">
+          <nav aria-label={t("label")} className="flex items-center gap-5 sm:gap-8">
             <Link
-              href="/#catalogue"
+              href="/fragrances"
               className="text-sm text-paper-muted transition-colors hover:text-paper"
             >
-              {t("catalogue")}
+              {t("fragrances")}
             </Link>
             <Link
-              href="/#reviews"
+              href="/brands"
               className="text-sm text-paper-muted transition-colors hover:text-paper"
             >
-              {t("reviews")}
+              {t("brands")}
             </Link>
           </nav>
           <LocaleSwitcher className="hidden sm:flex" />
@@ -44,16 +45,18 @@ export async function SiteHeader() {
               avatarUrl={profile.avatar_url}
             />
           ) : (
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-5 border-l border-line pl-5 sm:border-0 sm:pl-0">
               <Link
                 href="/login"
                 className="text-sm text-paper-muted transition-colors hover:text-paper"
               >
                 {t("signIn")}
               </Link>
-              <Link href="/signup" className={buttonClasses("primary", "h-9 px-4 text-xs")}>
-                {t("join")}
-              </Link>
+              <span className="hidden sm:inline-flex">
+                <Link href="/signup" className={buttonClasses("primary", "h-9 px-4 text-xs")}>
+                  {t("join")}
+                </Link>
+              </span>
             </div>
           )}
         </div>

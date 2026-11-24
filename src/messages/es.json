@@ -17,7 +17,9 @@
     "account": "Cuenta",
     "profile": "Perfil",
     "settings": "Ajustes",
-    "signOut": "Cerrar sesión"
+    "signOut": "Cerrar sesión",
+    "fragrances": "Perfumes",
+    "brands": "Marcas"
   },
   "Home": {
     "heroEyebrow": "Un diario de perfumes",
@@ -52,7 +54,8 @@
     "reviewsEmpty": "Todavía no hay reseñas. Las primeras entradas del diario aparecerán aquí.",
     "reviewBy": "por {username}",
     "notConfigured": "Supabase no está configurado. Copia .env.example como .env.local y añade las claves de tu proyecto (ver README).",
-    "loadError": "No se ha podido cargar el catálogo. Inténtalo de nuevo en un momento."
+    "loadError": "No se ha podido cargar el catálogo. Inténtalo de nuevo en un momento.",
+    "viewAll": "Ver todos los perfumes"
   },
   "Fragrance": {
     "notRated": "Sin puntuar",
@@ -201,5 +204,91 @@
   "Languages": {
     "en": "English",
     "es": "Español"
+  },
+  "Catalogue": {
+    "metaTitle": "Perfumes",
+    "metaDescription": "Busca en el catálogo de SCENTLOG por nombre, casa, familia olfativa, concentración y nota.",
+    "eyebrow": "El catálogo",
+    "title": "Perfumes",
+    "count": "{count, plural, =0 {Ningún perfume} one {# perfume} other {# perfumes}}",
+    "searchLabel": "Buscar",
+    "searchPlaceholder": "Nombre o casa…",
+    "search": "Buscar",
+    "family": "Familia",
+    "allFamilies": "Todas las familias",
+    "concentration": "Concentración",
+    "allConcentrations": "Todas las concentraciones",
+    "brand": "Casa",
+    "allBrands": "Todas las casas",
+    "sort": "Ordenar por",
+    "sorts": {
+      "popular": "Más populares",
+      "rating": "Mejor valorados",
+      "newest": "Más recientes",
+      "az": "A–Z"
+    },
+    "clear": "Quitar filtros",
+    "noteFilter": "Nota: {note}",
+    "removeFilter": "Quitar filtro",
+    "empty": "Ningún perfume coincide con estos filtros.",
+    "emptyHint": "Prueba con una búsqueda más corta o quita algún filtro.",
+    "pagination": "Páginas",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "pageOf": "Página {page} de {pages}"
+  },
+  "FragrancePage": {
+    "by": "de",
+    "family": "Familia",
+    "perfumers": "Perfumistas",
+    "released": "Lanzamiento",
+    "communityRating": "Valoración de la comunidad",
+    "inDiaries": "{count, plural, =0 {Aún no está en ningún diario} one {En # diario} other {En # diarios}}",
+    "notes": "Notas",
+    "layers": {
+      "top": "Salida",
+      "heart": "Corazón",
+      "base": "Fondo"
+    },
+    "noNotes": "Notas aún sin documentar.",
+    "noteLink": "Ver perfumes con {note}",
+    "about": "Sobre el perfume",
+    "editions": "Otras ediciones",
+    "moreFrom": "Más de {brand}",
+    "viewBrand": "Todos los perfumes de {brand}",
+    "reviews": "Reseñas",
+    "reviewsEmpty": "Todavía no hay reseñas. Escribir reseñas llega en una próxima actualización.",
+    "imageCredit": "Imagen: {credit}",
+    "originalOf": "Original",
+    "flanker": "Edición de {name}"
+  },
+  "Brands": {
+    "metaTitle": "Marcas",
+    "metaDescription": "Todas las casas de perfumería del catálogo de SCENTLOG.",
+    "eyebrow": "Casas",
+    "title": "Marcas",
+    "count": "{count, plural, one {# perfume} other {# perfumes}}",
+    "founded": "Fundada en {year}",
+    "website": "Web oficial",
+    "fragrances": "Perfumes",
+    "empty": "Esta casa aún no tiene perfumes en el catálogo."
+  },
+  "Perfumer": {
+    "eyebrow": "Perfumista",
+    "fragrances": "{count, plural, one {# perfume} other {# perfumes}} en el catálogo"
+  },
+  "Admin": {
+    "title": "Admin · Imagen",
+    "hint": "Solo lo ven los administradores. Usa solo imágenes que tengas derecho a publicar.",
+    "choose": "Subir imagen",
+    "replace": "Cambiar imagen",
+    "credit": "Crédito / fuente",
+    "creditPlaceholder": "p. ej. Foto: SCENTLOG / Kit de prensa, cortesía de la casa",
+    "save": "Guardar imagen",
+    "uploading": "Subiendo…",
+    "saved": "Imagen guardada.",
+    "remove": "Quitar imagen",
+    "creditRequired": "Añade el crédito o la fuente de la imagen.",
+    "forbidden": "Solo los administradores pueden cambiar las imágenes del catálogo."
   }
 }

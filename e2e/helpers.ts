@@ -52,3 +52,28 @@ export async function signOut(page: Page) {
 
 /** Form alerts (scoped to <main>; Next.js adds its own hidden route announcer). */
 export const formAlert = (page: Page) => page.locator("main").getByRole("alert");
+
+/**
+ * Makes a user admin using the LOCAL Supabase secret key (read from
+ * `supabase status`; it never exists in app code or in the repository).
+ */
+export async function makeAdmin(username: string) {
+  const { execSync } = await import("node:child_process");
+  const env = execSync("npx supabase status -o env", { encoding: "utf8" });
+  const read = (name: string) => env.match(new RegExp(`^${name}="?([^"\\n]+)"?`, "m"))?.[1];
+  const apiUrl = read("API_URL");
+  const secret = read("SECRET_KEY") ?? read("SERVICE_ROLE_KEY");
+  if (!apiUrl || !secret) throw new Error("Local Supabase is not running");
+
+  const response = await fetch(`${apiUrl}/rest/v1/profiles?username=eq.${username}`, {
+    method: "PATCH",
+    headers: {
+      apikey: secret,
+      Authorization: `Bearer ${secret}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ is_admin: true }),
+  });
+  if (!response.ok)
+    throw new Error(`Could not make admin: ${response.status} ${await response.text()}`);
+}

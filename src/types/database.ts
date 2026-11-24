@@ -181,14 +181,14 @@ isOneToOne: false
                   ]
                 },"fragrances": {
                   Row: {
-                    "brand_id": string,"concentration": Database["public"]['Enums']["fragrance_concentration"],"created_at": string,"description_en": string | null,"description_es": string | null,"diary_count": number,"family_id": number | null,"id": string,"image_credit": string | null,"image_url": string | null,"name": string,"parent_id": string | null,"rating_avg": number | null,"rating_count": number,"release_year": number | null,"review_count": number,"slug": string,"updated_at": string
+                    "brand_id": string,"concentration": Database["public"]['Enums']["fragrance_concentration"],"created_at": string,"description_en": string | null,"description_es": string | null,"diary_count": number,"family_id": number | null,"id": string,"image_credit": string | null,"image_url": string | null,"name": string,"parent_id": string | null,"rating_avg": number | null,"rating_count": number,"release_year": number | null,"review_count": number,"search_text": string,"slug": string,"updated_at": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "brand_id": string,"concentration": Database["public"]['Enums']["fragrance_concentration"],"created_at"?: string,"description_en"?: string | null,"description_es"?: string | null,"diary_count"?: number,"family_id"?: number | null,"id"?: string,"image_credit"?: string | null,"image_url"?: string | null,"name": string,"parent_id"?: string | null,"rating_avg"?: number | null,"rating_count"?: number,"release_year"?: number | null,"review_count"?: number,"slug": string,"updated_at"?: string
+                    "brand_id": string,"concentration": Database["public"]['Enums']["fragrance_concentration"],"created_at"?: string,"description_en"?: string | null,"description_es"?: string | null,"diary_count"?: number,"family_id"?: number | null,"id"?: string,"image_credit"?: string | null,"image_url"?: string | null,"name": string,"parent_id"?: string | null,"rating_avg"?: number | null,"rating_count"?: number,"release_year"?: number | null,"review_count"?: number,"search_text"?: string,"slug": string,"updated_at"?: string
                   }
                   Update: {
-                    "brand_id"?: string,"concentration"?: Database["public"]['Enums']["fragrance_concentration"],"created_at"?: string,"description_en"?: string | null,"description_es"?: string | null,"diary_count"?: number,"family_id"?: number | null,"id"?: string,"image_credit"?: string | null,"image_url"?: string | null,"name"?: string,"parent_id"?: string | null,"rating_avg"?: number | null,"rating_count"?: number,"release_year"?: number | null,"review_count"?: number,"slug"?: string,"updated_at"?: string
+                    "brand_id"?: string,"concentration"?: Database["public"]['Enums']["fragrance_concentration"],"created_at"?: string,"description_en"?: string | null,"description_es"?: string | null,"diary_count"?: number,"family_id"?: number | null,"id"?: string,"image_credit"?: string | null,"image_url"?: string | null,"name"?: string,"parent_id"?: string | null,"rating_avg"?: number | null,"rating_count"?: number,"release_year"?: number | null,"review_count"?: number,"search_text"?: string,"slug"?: string,"updated_at"?: string
                   }
                   Relationships: [
                     {
@@ -339,14 +339,14 @@ isOneToOne: false
                   ]
                 },"profiles": {
                   Row: {
-                    "avatar_url": string | null,"bio": string | null,"created_at": string,"display_name": string | null,"id": string,"locale": string,"updated_at": string,"username": string
+                    "avatar_url": string | null,"bio": string | null,"created_at": string,"display_name": string | null,"id": string,"is_admin": boolean,"locale": string,"updated_at": string,"username": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "avatar_url"?: string | null,"bio"?: string | null,"created_at"?: string,"display_name"?: string | null,"id": string,"locale"?: string,"updated_at"?: string,"username": string
+                    "avatar_url"?: string | null,"bio"?: string | null,"created_at"?: string,"display_name"?: string | null,"id": string,"is_admin"?: boolean,"locale"?: string,"updated_at"?: string,"username": string
                   }
                   Update: {
-                    "avatar_url"?: string | null,"bio"?: string | null,"created_at"?: string,"display_name"?: string | null,"id"?: string,"locale"?: string,"updated_at"?: string,"username"?: string
+                    "avatar_url"?: string | null,"bio"?: string | null,"created_at"?: string,"display_name"?: string | null,"id"?: string,"is_admin"?: boolean,"locale"?: string,"updated_at"?: string,"username"?: string
                   }
                   Relationships: [
                     
@@ -467,8 +467,14 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "is_reserved_username":
+            "is_admin":
+{ Args: Record<PropertyKey, never>; Returns: boolean
+                           },
+"is_reserved_username":
 { Args: { "name": string }; Returns: boolean
+                           },
+"normalize_search":
+{ Args: { "value": string }; Returns: string
                            },
 "refresh_fragrance_diary_stats":
 { Args: { "target": string }; Returns: undefined

@@ -4,6 +4,7 @@ import { FragranceCard } from "@/components/fragrance/FragranceCard";
 import { Container } from "@/components/ui/Container";
 import { getFeaturedFragrances } from "@/features/fragrances/queries";
 import { getRecentReviews } from "@/features/reviews/queries";
+import { Link } from "@/i18n/navigation";
 import type { QueryResult } from "@/lib/result";
 
 const PILLARS = ["log", "rate", "collect", "follow"] as const;
@@ -38,18 +39,18 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             </div>
             <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
               <p className="max-w-md text-base leading-relaxed text-paper-muted">{t("heroBody")}</p>
-              <a
-                href="#catalogue"
+              <Link
+                href="/fragrances"
                 className="group inline-flex shrink-0 items-center gap-3 border-b border-paper/40 pb-1.5 text-sm tracking-wide transition-colors hover:border-paper"
               >
                 {t("heroCta")}
                 <span
                   aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:translate-y-0.5"
+                  className="transition-transform duration-300 group-hover:translate-x-0.5"
                 >
-                  ↓
+                  →
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -110,6 +111,15 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                 <FragranceCard key={fragrance.id} fragrance={fragrance} />
               ))}
             </div>
+          ) : null}
+
+          {items.length > 0 ? (
+            <Link
+              href="/fragrances"
+              className="link-underline mt-16 inline-block text-sm text-paper-muted"
+            >
+              {t("viewAll")} →
+            </Link>
           ) : null}
         </Container>
       </section>

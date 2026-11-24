@@ -72,3 +72,11 @@ In the Supabase dashboard → **Authentication → URL Configuration**:
 - **Redirect URLs:** add `http://localhost:3000/**`
 
 Local test emails can be read in Mailpit at http://127.0.0.1:54324.
+
+## Making yourself an admin
+
+Admins can upload fragrance images from the fragrance page. In the Supabase dashboard → **SQL Editor**, run (replace the username):
+
+```sql
+update public.profiles set is_admin = true where username = 'your_username';
+```

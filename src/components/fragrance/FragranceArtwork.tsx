@@ -15,6 +15,10 @@ const FAMILY_TONES: Array<[prefix: string, tone: string]> = [
   ["woody", "#1b1915"],
 ];
 
+function isLocalUrl(url: string) {
+  return /^https?:\/\/(127\.0\.0\.1|localhost)(:|\/)/.test(url);
+}
+
 function toneFor(familySlug: string | null | undefined) {
   if (!familySlug) return "#171715";
   return FAMILY_TONES.find(([prefix]) => familySlug.startsWith(prefix))?.[1] ?? "#171715";
@@ -55,7 +59,10 @@ export function FragranceArtwork({
           src={imageUrl}
           alt={`${brand} ${name}`}
           fill
-          priority={priority}
+          preload={priority}
+          // Local Supabase (127.0.0.1) is blocked by Next's optimiser for
+          // security; those dev-only images are served as-is.
+          unoptimized={isLocalUrl(imageUrl)}
           sizes={
             size === "large" ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"
           }

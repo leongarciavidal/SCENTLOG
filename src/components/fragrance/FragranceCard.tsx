@@ -1,15 +1,13 @@
 import { useTranslations } from "next-intl";
 
 import { RatingStars } from "@/components/ui/RatingStars";
+import { Link } from "@/i18n/navigation";
 import type { FragranceCardData } from "@/features/fragrances/queries";
 import { cn } from "@/lib/utils";
 
 import { FragranceArtwork } from "./FragranceArtwork";
 
-/**
- * Catalogue card. Not yet a link: fragrance detail pages arrive in Milestone 3,
- * and we do not ship links to pages that do not exist.
- */
+/** Catalogue card linking to the fragrance page. */
 export function FragranceCard({
   fragrance,
   size = "default",
@@ -25,7 +23,7 @@ export function FragranceCard({
   const rating = fragrance.rating_avg === null ? null : Number(fragrance.rating_avg);
 
   return (
-    <article className={cn("group flex flex-col", className)}>
+    <article className={cn("group relative flex flex-col", className)}>
       <FragranceArtwork
         name={fragrance.name}
         brand={fragrance.brand.name}
@@ -45,7 +43,12 @@ export function FragranceCard({
             size === "large" ? "text-3xl sm:text-4xl" : "text-xl",
           )}
         >
-          {fragrance.name}
+          <Link
+            href={`/fragrances/${fragrance.slug}`}
+            className="transition-colors group-hover:text-paper-muted after:absolute after:inset-0"
+          >
+            {fragrance.name}
+          </Link>
         </h3>
         <p className="text-sm text-paper-muted">
           {t(`concentration.${fragrance.concentration}`)}

@@ -45,3 +45,19 @@ A short log of the important choices and why they were made.
 **No account enumeration.** Sign-up and password-reset responses never reveal whether an email is registered.
 
 **Local auth mirrors production.** `supabase/config.toml` has email confirmation on and an 8-character minimum password. Confirmation emails go to Mailpit, and the e2e tests read them from there.
+
+## 2026-11 — Milestone 3 (catalogue)
+
+**Search uses a `search_text` column.** It holds the fragrance name plus the brand name, lower-case and without accents (`public.normalize_search`). A trigger keeps it up to date, and a trigram index keeps `ILIKE '%…%'` fast. "hermes" finds "Hermès". Postgres can grow into full-text or fuzzy ranking later without changing the UI.
+
+**The catalogue is a plain GET form.** Each search and filter combination has its own shareable URL and works without JavaScript. With JavaScript, changing a select submits the form straight away. Invalid query values are ignored instead of failing.
+
+**Note, family, brand and perfumer links feed the catalogue filters.** For example, clicking "Iris" in a notes pyramid opens `/fragrances?note=iris`.
+
+**Editions.** A fragrance page lists its original (`parent_id`), its siblings and its children as "Other editions".
+
+**Admin role (`profiles.is_admin`).** Admins can change only a fragrance's image and image credit from the app. This is enforced by RLS, column grants and storage policies, all tested. Users cannot grant themselves the role. It is set from the Supabase SQL editor. A credit is required for every image.
+
+**Images from local Supabase (127.0.0.1)** skip Next's optimiser, which blocks private IPs for security. Images from hosted Supabase are optimised normally.
+
+**Brand countries are ISO codes (`FR`)**, shown in the user's language with `Intl.DisplayNames`.

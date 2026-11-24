@@ -17,7 +17,9 @@
     "account": "Account",
     "profile": "Profile",
     "settings": "Settings",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "fragrances": "Fragrances",
+    "brands": "Brands"
   },
   "Home": {
     "heroEyebrow": "A diary of fragrance",
@@ -52,7 +54,8 @@
     "reviewsEmpty": "No reviews yet. The first entries in the diary will appear here.",
     "reviewBy": "by {username}",
     "notConfigured": "Supabase is not configured. Copy .env.example to .env.local and add your project keys (see README).",
-    "loadError": "The catalogue could not be loaded right now. Please try again in a moment."
+    "loadError": "The catalogue could not be loaded right now. Please try again in a moment.",
+    "viewAll": "View all fragrances"
   },
   "Fragrance": {
     "notRated": "Not yet rated",
@@ -201,5 +204,91 @@
   "Languages": {
     "en": "English",
     "es": "Español"
+  },
+  "Catalogue": {
+    "metaTitle": "Fragrances",
+    "metaDescription": "Search the SCENTLOG fragrance catalogue by name, house, olfactive family, concentration and note.",
+    "eyebrow": "The catalogue",
+    "title": "Fragrances",
+    "count": "{count, plural, =0 {No fragrances} one {# fragrance} other {# fragrances}}",
+    "searchLabel": "Search",
+    "searchPlaceholder": "Name or house…",
+    "search": "Search",
+    "family": "Family",
+    "allFamilies": "All families",
+    "concentration": "Concentration",
+    "allConcentrations": "All concentrations",
+    "brand": "House",
+    "allBrands": "All houses",
+    "sort": "Sort by",
+    "sorts": {
+      "popular": "Most popular",
+      "rating": "Highest rated",
+      "newest": "Newest",
+      "az": "A–Z"
+    },
+    "clear": "Clear filters",
+    "noteFilter": "Note: {note}",
+    "removeFilter": "Remove filter",
+    "empty": "No fragrances match these filters.",
+    "emptyHint": "Try a shorter search or remove a filter.",
+    "pagination": "Pages",
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {pages}"
+  },
+  "FragrancePage": {
+    "by": "by",
+    "family": "Family",
+    "perfumers": "Perfumers",
+    "released": "Released",
+    "communityRating": "Community rating",
+    "inDiaries": "{count, plural, =0 {Not in any diary yet} one {In # diary} other {In # diaries}}",
+    "notes": "Notes",
+    "layers": {
+      "top": "Top",
+      "heart": "Heart",
+      "base": "Base"
+    },
+    "noNotes": "Notes not yet documented.",
+    "noteLink": "See fragrances with {note}",
+    "about": "About",
+    "editions": "Other editions",
+    "moreFrom": "More from {brand}",
+    "viewBrand": "All {brand} fragrances",
+    "reviews": "Reviews",
+    "reviewsEmpty": "No reviews yet. Writing reviews arrives in a coming update.",
+    "imageCredit": "Image: {credit}",
+    "originalOf": "Original",
+    "flanker": "Edition of {name}"
+  },
+  "Brands": {
+    "metaTitle": "Brands",
+    "metaDescription": "Every fragrance house in the SCENTLOG catalogue.",
+    "eyebrow": "Houses",
+    "title": "Brands",
+    "count": "{count, plural, one {# fragrance} other {# fragrances}}",
+    "founded": "Founded {year}",
+    "website": "Official website",
+    "fragrances": "Fragrances",
+    "empty": "This house has no fragrances in the catalogue yet."
+  },
+  "Perfumer": {
+    "eyebrow": "Perfumer",
+    "fragrances": "{count, plural, one {# fragrance} other {# fragrances}} in the catalogue"
+  },
+  "Admin": {
+    "title": "Admin · Image",
+    "hint": "Visible only to admins. Use only images you have the right to publish.",
+    "choose": "Upload image",
+    "replace": "Replace image",
+    "credit": "Credit / source",
+    "creditPlaceholder": "e.g. Photo: SCENTLOG / Press kit, courtesy of the house",
+    "save": "Save image",
+    "uploading": "Uploading…",
+    "saved": "Image saved.",
+    "remove": "Remove image",
+    "creditRequired": "Add a credit or source for the image.",
+    "forbidden": "Only admins can change catalogue images."
   }
 }
