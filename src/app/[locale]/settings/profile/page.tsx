@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buttonClasses } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { getCurrentProfile, requireUser } from "@/features/auth/session";
+import { DeleteAccountForm } from "@/features/account/components/DeleteAccountForm";
 import { AvatarUploader } from "@/features/profiles/components/AvatarUploader";
 import { ProfileForm } from "@/features/profiles/components/ProfileForm";
 import { Link } from "@/i18n/navigation";
@@ -27,6 +28,7 @@ export default async function SettingsProfilePage({
   if (!profile) throw new Error("Profile not found for signed-in user");
 
   const t = await getTranslations("Settings");
+  const ta = await getTranslations("Account");
 
   return (
     <Container className="py-16 sm:py-24">
@@ -71,6 +73,23 @@ export default async function SettingsProfilePage({
             <Link href="/reset-password" className={buttonClasses("secondary", "self-start")}>
               {t("changePassword")}
             </Link>
+          </section>
+
+          <section className="flex flex-col gap-5 border-t border-line pt-10">
+            <h2 className="eyebrow text-paper">{ta("dataTitle")}</h2>
+            <p className="text-sm text-paper-muted">{ta("dataBody")}</p>
+            {/* Plain link: a file download, not a page navigation. */}
+            <a
+              href="/api/account/export"
+              className={buttonClasses("secondary", "self-start")}
+              download
+            >
+              {ta("download")}
+            </a>
+          </section>
+
+          <section className="border-t border-line pt-10">
+            <DeleteAccountForm username={profile.username} />
           </section>
         </div>
       </div>

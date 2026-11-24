@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import { routing, type Locale } from "@/i18n/routing";
 import { text, toFieldErrors, type FormState } from "@/lib/forms";
+import { isRateLimited } from "@/lib/supabase/errors";
 import { createClient } from "@/lib/supabase/server";
 
 import { listSchema } from "./schemas";
@@ -54,6 +55,7 @@ export async function createList(
     .select("id")
     .single();
   if (error || !data) {
+    if (isRateLimited(error)) return { status: "error", formError: "rateLimited", values };
     console.error("[lists] create", error?.code, error?.message);
     return { status: "error", formError: "unknown", values };
   }

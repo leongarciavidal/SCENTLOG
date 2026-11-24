@@ -9,6 +9,7 @@ export function SiteFooter() {
   const t = useTranslations("Footer");
   const tc = useTranslations("Common");
   const tn = useTranslations("Nav");
+  const tl = useTranslations("Legal");
   const links = [
     ["/discover", tn("discover")],
     ["/fragrances", tn("fragrances")],
@@ -38,6 +39,13 @@ export function SiteFooter() {
         </nav>
         <div className="flex flex-col gap-4 text-sm text-paper-faint sm:items-end">
           <LocaleSwitcher />
+          <nav aria-label={tl("eyebrow")} className="flex gap-4 text-xs">
+            {(["privacy", "terms", "cookies"] as const).map((doc) => (
+              <Link key={doc} href={`/${doc}`} className="transition-colors hover:text-paper">
+                {tl(doc)}
+              </Link>
+            ))}
+          </nav>
           <p>
             {t("rights", { year: new Date().getFullYear() })} — {t("note")}
           </p>

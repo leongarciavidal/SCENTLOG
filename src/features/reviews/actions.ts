@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { text, toFieldErrors, type FormState } from "@/lib/forms";
+import { isRateLimited } from "@/lib/supabase/errors";
 import { createClient } from "@/lib/supabase/server";
 
 import { commentSchema, REVIEW_DIMENSIONS, reviewSchema } from "./schemas";
@@ -67,6 +68,7 @@ export async function saveReview(
         .from("reviews")
         .insert({ ...parsed.data, user_id: userId, fragrance_id: fragranceId });
   if (error) {
+    if (isRateLimited(error)) return { status: "error", formError: "rateLimited", values };
     console.error("[review]", error.code, error.message);
     return { status: "error", formError: "unknown", values };
   }
@@ -79,11 +81,8 @@ export async function deleteReview(reviewId: string): Promise<{ ok: boolean }> {
   if (!uuid.safeParse(reviewId).success) return { ok: false };
   const { supabase, userId } = await session();
   if (!userId) return { ok: false };
-  const { error } = await supabase
-    .from("reviews")
-    .delete()
-    .eq("id", reviewId)
-    .eq("user_id", userId);
+  // RLS allows the author or an admin.
+  const { error } = await supabase.from("reviews").delete().eq("id", reviewId);
   if (error) return { ok: false };
   revalidatePath("/", "layout");
   return { ok: true };
@@ -121,6 +120,7 @@ export async function addComment(
     .from("review_comments")
     .insert({ review_id: reviewId, user_id: userId, body: parsed.data.body });
   if (error) {
+    if (isRateLimited(error)) return { status: "error", formError: "rateLimited", values };
     console.error("[comment]", error.code, error.message);
     return { status: "error", formError: "unknown", values };
   }
@@ -133,11 +133,8 @@ export async function deleteComment(commentId: string): Promise<{ ok: boolean }>
   if (!uuid.safeParse(commentId).success) return { ok: false };
   const { supabase, userId } = await session();
   if (!userId) return { ok: false };
-  const { error } = await supabase
-    .from("review_comments")
-    .delete()
-    .eq("id", commentId)
-    .eq("user_id", userId);
+  // RLS allows the author or an admin.
+  const { error } = await supabase.from("review_comments").delete().eq("id", commentId);
   if (error) return { ok: false };
   revalidatePath("/", "layout");
   return { ok: true };

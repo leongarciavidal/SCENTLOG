@@ -17,13 +17,18 @@ import { ReviewCard } from "@/features/reviews/components/ReviewCard";
 import { getLikedReviewIds, getRecentReviews } from "@/features/reviews/queries";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { alternatesFor } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/discover">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale: locale as Locale, namespace: "Discover" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: alternatesFor(locale, "/discover"),
+  };
 }
 
 export default async function DiscoverPage({ params }: PageProps<"/[locale]/discover">) {

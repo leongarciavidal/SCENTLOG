@@ -129,7 +129,8 @@
       "reviewTooLong": "Usa como máximo 10.000 caracteres.",
       "commentTooLong": "Usa como máximo 2.000 caracteres.",
       "titleTooLong": "Usa como máximo 120 caracteres.",
-      "descriptionTooLong": "Usa como máximo 2.000 caracteres."
+      "descriptionTooLong": "Usa como máximo 2.000 caracteres.",
+      "confirmMismatch": "Escribe tu nombre de usuario exactamente para confirmar."
     },
     "success": {
       "checkEmail": "Casi listo. Te hemos enviado un enlace de confirmación por email: ábrelo para activar tu cuenta.",
@@ -163,7 +164,7 @@
       "submit": "Crear cuenta",
       "haveAccount": "¿Ya tienes cuenta?",
       "signIn": "Entrar",
-      "terms": "Al crear una cuenta te comprometes a ser amable y honesto."
+      "terms": "Al crear una cuenta aceptas los <terms>Términos de uso</terms> y la <privacy>Política de privacidad</privacy>. Debes tener 16 años o más."
     },
     "forgot": {
       "metaTitle": "Restablecer contraseña",
@@ -536,5 +537,30 @@
     "noRated": "Todavía no se ha valorado nada.",
     "noReviews": "Todavía no hay reseñas.",
     "noLists": "Todavía no hay listas públicas."
+  },
+  "Account": {
+    "dataTitle": "Tus datos",
+    "dataBody": "Descarga una copia de todo lo que SCENTLOG guarda sobre ti: perfil, diario, reseñas, comentarios, listas y seguimientos.",
+    "download": "Descargar mis datos (JSON)",
+    "deleteTitle": "Borrar cuenta",
+    "deleteBody": "Esto borra para siempre tu cuenta, diario, reseñas, comentarios, listas, likes y fotos. No se puede deshacer.",
+    "deleteConfirmLabel": "Escribe «{username}» para confirmar",
+    "deleteButton": "Borrar mi cuenta para siempre",
+    "deleted": "Tu cuenta y todos tus datos se han borrado."
+  },
+  "Legal": {
+    "eyebrow": "Legal",
+    "updated": "Última actualización: {date}",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "cookies": "Cookies"
+  },
+  "Errors": {
+    "eyebrow": "Error",
+    "title": "Algo ha fallado.",
+    "body": "Se ha producido un error inesperado. Vuelve a intentarlo en un momento.",
+    "retry": "Reintentar",
+    "home": "Volver a la portada",
+    "reference": "Referencia: {digest}"
   }
 }

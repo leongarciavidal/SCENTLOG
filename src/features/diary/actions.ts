@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { text, toFieldErrors, type FormState } from "@/lib/forms";
+import { isRateLimited } from "@/lib/supabase/errors";
 import { createClient } from "@/lib/supabase/server";
 
 import { diaryEntrySchema } from "./schemas";
@@ -62,6 +63,7 @@ export async function saveDiaryEntry(
         .insert({ ...parsed.data, user_id: userId, fragrance_id: fragranceId });
 
   if (error) {
+    if (isRateLimited(error)) return { status: "error", formError: "rateLimited", values };
     console.error("[diary]", error.code, error.message);
     return { status: "error", formError: "unknown", values };
   }

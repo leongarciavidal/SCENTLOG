@@ -8,13 +8,18 @@ import { ListCard } from "@/features/lists/components/ListCard";
 import { getPopularLists, getRecentLists } from "@/features/lists/queries";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { alternatesFor } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/lists">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale: locale as Locale, namespace: "Lists" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: alternatesFor(locale, "/lists"),
+  };
 }
 
 export default async function ListsPage({ params }: PageProps<"/[locale]/lists">) {

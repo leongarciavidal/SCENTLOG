@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+  <body style="margin: 0; padding: 0; background: #0e0e0d">
+    <table
+      role="presentation"
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      style="background: #0e0e0d; padding: 48px 16px"
+    >
+      <tr>
+        <td align="center">
+          <table
+            role="presentation"
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            style="max-width: 520px; font-family: Helvetica, Arial, sans-serif; color: #ede8df"
+          >
+            <tr>
+              <td
+                style="font-size: 12px; letter-spacing: 6px; font-weight: 600; padding-bottom: 40px"
+              >
+                SCENTLOG
+              </td>
+            </tr>
+            {{ if eq .Data.locale "es" }}
+            <tr>
+              <td
+                style="
+                  font-family: Georgia, serif;
+                  font-size: 34px;
+                  line-height: 1.1;
+                  padding-bottom: 20px;
+                "
+              >
+                Restablece tu contraseña
+              </td>
+            </tr>
+            <tr>
+              <td style="font-size: 15px; line-height: 1.6; color: #a29c91; padding-bottom: 32px">
+                Hemos recibido una solicitud para restablecer la contraseña de tu cuenta de
+                SCENTLOG. El enlace solo sirve una vez y caduca pronto.
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-bottom: 32px">
+                <a
+                  href="{{ .ConfirmationURL }}"
+                  style="
+                    display: inline-block;
+                    background: #ede8df;
+                    color: #0e0e0d;
+                    text-decoration: none;
+                    font-size: 14px;
+                    padding: 14px 28px;
+                  "
+                  >Elegir una contraseña nueva</a
+                >
+              </td>
+            </tr>
+            <tr>
+              <td style="font-size: 12px; line-height: 1.6; color: #8f8a80">
+                Si no lo has pedido tú, ignora este email: tu contraseña no cambiará.
+              </td>
+            </tr>
+            {{ else }}
+            <tr>
+              <td
+                style="
+                  font-family: Georgia, serif;
+                  font-size: 34px;
+                  line-height: 1.1;
+                  padding-bottom: 20px;
+                "
+              >
+                Reset your password
+              </td>
+            </tr>
+            <tr>
+              <td style="font-size: 15px; line-height: 1.6; color: #a29c91; padding-bottom: 32px">
+                We received a request to reset the password of your SCENTLOG account. This link can
+                be used once and expires soon.
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-bottom: 32px">
+                <a
+                  href="{{ .ConfirmationURL }}"
+                  style="
+                    display: inline-block;
+                    background: #ede8df;
+                    color: #0e0e0d;
+                    text-decoration: none;
+                    font-size: 14px;
+                    padding: 14px 28px;
+                  "
+                  >Choose a new password</a
+                >
+              </td>
+            </tr>
+            <tr>
+              <td style="font-size: 12px; line-height: 1.6; color: #8f8a80">
+                If you did not ask for this, ignore this email: your password will not change.
+              </td>
+            </tr>
+            {{ end }}
+            <tr>
+              <td
+                style="
+                  font-family: Georgia, serif;
+                  font-style: italic;
+                  font-size: 14px;
+                  color: #8f8a80;
+                  padding-top: 48px;
+                "
+              >
+                A diary of fragrance · Un diario de perfumes
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

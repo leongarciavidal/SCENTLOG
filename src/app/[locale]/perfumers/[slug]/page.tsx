@@ -6,13 +6,16 @@ import { FragranceGrid } from "@/components/fragrance/FragranceGrid";
 import { Container } from "@/components/ui/Container";
 import { getPerfumerBySlug, getPerfumerFragrances } from "@/features/fragrances/queries";
 import type { Locale } from "@/i18n/routing";
+import { alternatesFor } from "@/lib/seo";
 
 type Props = PageProps<"/[locale]/perfumers/[slug]">;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const perfumer = await getPerfumerBySlug(slug);
-  return perfumer ? { title: perfumer.name } : {};
+  return perfumer
+    ? { title: perfumer.name, alternates: alternatesFor(locale, `/perfumers/${slug}`) }
+    : {};
 }
 
 export default async function PerfumerPage({ params }: Props) {

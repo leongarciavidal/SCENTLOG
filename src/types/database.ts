@@ -470,6 +470,9 @@ isOneToOne: false
             "add_list_item":
 { Args: { "p_fragrance_id": string,"p_list_id": string }; Returns: undefined
                            },
+"delete_my_account":
+{ Args: Record<PropertyKey, never>; Returns: undefined
+                           },
 "feed_events":
 { Args: { "before_id"?: number,"page_size"?: number }; Returns: {
               "actor_id": string,

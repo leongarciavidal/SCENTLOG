@@ -37,11 +37,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     metadataBase: new URL(siteUrl),
     title: { default: t("title"), template: "%s — SCENTLOG" },
     description: t("description"),
-    alternates: {
-      canonical: `/${locale}`,
-      languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}`])),
-    },
     openGraph: { title: t("title"), description: t("description"), siteName: "SCENTLOG" },
+    twitter: { card: "summary_large_image" },
   };
 }
 

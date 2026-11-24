@@ -1,12 +1,19 @@
 import { expect, test } from "@playwright/test";
 
-import { formAlert, latestEmailLink, signOut, signUpAndConfirm, uniqueUser } from "./helpers";
+import {
+  formAlert,
+  latestEmailLink,
+  signOut,
+  signUpAndConfirm,
+  uniqueUser,
+  accountMenu,
+} from "./helpers";
 
 test("sign up, confirm email and land on the new profile", async ({ page }) => {
   const user = await signUpAndConfirm(page);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(user.username);
   // Header now shows the account menu instead of "Sign in".
-  await expect(page.getByLabel("Account")).toBeVisible();
+  await expect(accountMenu(page)).toBeVisible();
   await expect(page.getByRole("link", { name: "Sign in" })).toHaveCount(0);
 });
 
@@ -55,7 +62,7 @@ test("sign out, wrong password, then sign in", async ({ page }) => {
   await page.getByLabel("Password").fill(user.password);
   await page.getByRole("button", { name: "Sign in" }).click();
   await expect(page).toHaveURL(/\/en$/);
-  await expect(page.getByLabel("Account")).toBeVisible();
+  await expect(accountMenu(page)).toBeVisible();
 });
 
 test("protected settings page redirects to login and back", async ({ page }) => {
@@ -94,7 +101,7 @@ test("password recovery by email", async ({ page, context }) => {
   await page.getByLabel("Email").fill(user.email);
   await page.getByLabel("Password").fill("brand-new-pass-77");
   await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page.getByLabel("Account")).toBeVisible();
+  await expect(accountMenu(page)).toBeVisible();
 });
 
 test("an invalid email link shows a friendly error", async ({ page }) => {

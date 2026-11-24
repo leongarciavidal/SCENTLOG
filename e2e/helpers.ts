@@ -52,7 +52,7 @@ export async function signUpAndConfirm(page: Page, user = uniqueUser()) {
 
 /** Signs out through the account menu and waits until it has completed. */
 export async function signOut(page: Page) {
-  await page.getByLabel("Account").click();
+  await accountMenu(page).click();
   await page.getByRole("button", { name: /Sign out|Cerrar sesión/ }).click();
   await expect(page.getByRole("link", { name: /Sign in|Entrar/ })).toBeVisible();
 }
@@ -84,3 +84,6 @@ export async function makeAdmin(username: string) {
   if (!response.ok)
     throw new Error(`Could not make admin: ${response.status} ${await response.text()}`);
 }
+
+/** The account menu button in the header (shown when signed in). */
+export const accountMenu = (page: Page) => page.locator("header summary");

@@ -103,3 +103,25 @@ A short log of the important choices and why they were made.
 **Navigation.** On phones the header shows only Discover and Fragrances; every section is also linked in the footer.
 
 **E2E reliability.** The test email helper now checks the exact recipient, because Mailpit's search is fuzzy.
+
+## 2026-11 — Milestone 7 (polish and launch preparation)
+
+**Rate limits in the database.** A generic `enforce_rate_limit` BEFORE INSERT trigger caps reviews, comments, lists, follows, likes and diary entries per user and time window. It applies only to signed-in API requests. The app turns the error into "Too many attempts".
+
+**Moderation.** Admins can delete any review, comment or list, enforced by RLS policies.
+
+**GDPR.** Settings has "Download my data", a JSON export of everything stored about the user, and "Delete account". Deletion goes through the `delete_my_account` RPC, which removes the auth user and cascades to all their data; their uploaded files are removed first.
+
+**Security headers.** CSP `frame-ancestors 'none'`, X-Frame-Options, nosniff, a strict Referrer-Policy, a Permissions-Policy and HSTS in production. No full script CSP yet: Next.js inline scripts would need nonces, which is a future improvement.
+
+**SEO.** Every public page has its own canonical URL and hreflang alternates (`lib/seo.ts`). There is a sitemap (hourly), robots rules that keep private pages out of search, a default Open Graph image per language and page-specific Open Graph data.
+
+**No route-level `loading.tsx`.** Streaming the page before `notFound()` runs turned real 404s into 200s, so correct status codes won over a loading bar.
+
+**Accessibility.** axe (WCAG 2.1 AA) runs on 21 pages in the e2e suite. The faint text colour was raised to `#8f8a80` (≥ 4.8:1 contrast on every surface).
+
+**Performance.** Measured on a throttled mid-range phone, LCP is under 1 s on key pages, with CLS 0 and about 40 KB transferred after the first visit. No changes needed.
+
+**Emails.** Auth emails are branded and bilingual (`supabase/templates`), with the language picked from the user's sign-up locale.
+
+**Legal pages.** Privacy, terms and cookies are written for GDPR/ePrivacy. The owner's identity comes from `NEXT_PUBLIC_LEGAL_*` variables. Only strictly necessary cookies are used, so no consent banner is needed.

@@ -6,6 +6,7 @@ import { useActionState } from "react";
 import { Field } from "@/components/ui/Field";
 import { FormAlert } from "@/components/ui/FormAlert";
 import { SubmitButton } from "@/components/ui/SubmitButton";
+import { Link } from "@/i18n/navigation";
 import { initialFormState } from "@/lib/forms";
 
 import { signUp } from "../actions";
@@ -55,7 +56,20 @@ export function SignUpForm() {
         error={state.fieldErrors?.password}
       />
       <SubmitButton className="mt-2">{t("submit")}</SubmitButton>
-      <p className="text-xs leading-relaxed text-paper-faint">{t("terms")}</p>
+      <p className="text-xs leading-relaxed text-paper-faint">
+        {t.rich("terms", {
+          terms: (chunks) => (
+            <Link href="/terms" className="link-underline text-paper-muted">
+              {chunks}
+            </Link>
+          ),
+          privacy: (chunks) => (
+            <Link href="/privacy" className="link-underline text-paper-muted">
+              {chunks}
+            </Link>
+          ),
+        })}
+      </p>
     </form>
   );
 }

@@ -25,6 +25,7 @@ import {
 } from "@/features/profiles/queries";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { alternatesFor, openGraphFor } from "@/lib/seo";
 
 type Props = PageProps<"/[locale]/[username]">;
 
@@ -35,12 +36,18 @@ async function loadProfile(username: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { username } = await params;
+  const { locale, username } = await params;
   const profile = await loadProfile(username);
   if (!profile) return {};
   const name = profile.display_name || profile.username;
   return {
     title: `${name} (@${profile.username})`,
+    alternates: alternatesFor(locale, `/${profile.username}`),
+    openGraph: openGraphFor(locale, {
+      title: `${name} (@${profile.username})`,
+      description: profile.bio ?? undefined,
+      image: profile.avatar_url,
+    }),
     description: profile.bio ?? undefined,
   };
 }

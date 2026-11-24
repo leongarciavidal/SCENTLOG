@@ -24,6 +24,7 @@ import {
 } from "@/features/fragrances/queries";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { alternatesFor, openGraphFor } from "@/lib/seo";
 import { localized } from "@/lib/localized";
 
 type Props = PageProps<"/[locale]/fragrances/[slug]">;
@@ -37,10 +38,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     namespace: "Fragrance.concentration",
   });
   const title = `${fragrance.name} ${tc(fragrance.concentration)} — ${fragrance.brand.name}`;
+  const description = localized(fragrance, "description", locale) ?? undefined;
   return {
     title,
-    description: localized(fragrance, "description", locale) ?? undefined,
-    openGraph: fragrance.image_url ? { images: [fragrance.image_url] } : undefined,
+    description,
+    alternates: alternatesFor(locale, `/fragrances/${slug}`),
+    openGraph: openGraphFor(locale, { title, description, image: fragrance.image_url }),
   };
 }
 

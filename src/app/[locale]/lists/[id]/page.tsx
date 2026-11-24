@@ -13,6 +13,7 @@ import { ListLikeButton } from "@/features/lists/components/ListLikeButton";
 import { getListById, getListItems, hasLikedList } from "@/features/lists/queries";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { alternatesFor, openGraphFor } from "@/lib/seo";
 
 type Props = PageProps<"/[locale]/lists/[id]">;
 
@@ -21,11 +22,17 @@ async function load(id: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
+  const { locale, id } = await params;
   const list = await load(id);
   if (!list) return {};
   return {
     title: list.title,
+    alternates: alternatesFor(locale, `/lists/${id}`),
+    openGraph: openGraphFor(locale, {
+      title: list.title,
+      description: list.description ?? undefined,
+      image: list.cover_image_url,
+    }),
     description: list.description ?? undefined,
     robots: list.is_public ? undefined : { index: false },
   };

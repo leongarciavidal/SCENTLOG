@@ -5,7 +5,7 @@ import { z } from "zod";
 
 import { Avatar } from "@/components/profile/Avatar";
 import { Container } from "@/components/ui/Container";
-import { getCurrentUser } from "@/features/auth/session";
+import { getCurrentProfile, getCurrentUser } from "@/features/auth/session";
 import { deleteComment } from "@/features/reviews/actions";
 import { CommentForm } from "@/features/reviews/components/CommentForm";
 import { DeleteButton } from "@/features/reviews/components/DeleteButton";
@@ -48,7 +48,10 @@ export default async function ReviewPage({ params }: Props) {
     getCurrentUser(),
     getReviewComments(review.id),
   ]);
-  const liked = await getLikedReviewIds(viewer?.id, [review.id]);
+  const [liked, viewerProfile] = await Promise.all([
+    getLikedReviewIds(viewer?.id, [review.id]),
+    getCurrentProfile(),
+  ]);
 
   return (
     <Container className="py-16 sm:py-20">
@@ -97,7 +100,7 @@ export default async function ReviewPage({ params }: Props) {
                         <time dateTime={comment.created_at} className="text-xs text-paper-faint">
                           {format.relativeTime(new Date(comment.created_at))}
                         </time>
-                        {viewer?.id === comment.user_id ? (
+                        {viewer?.id === comment.user_id || viewerProfile?.is_admin ? (
                           <DeleteButton
                             label={t("deleteComment")}
                             confirm={t("deleteComment") + "?"}

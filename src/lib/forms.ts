@@ -30,6 +30,7 @@ export type ErrorCode =
   | "commentTooLong"
   | "titleTooLong"
   | "descriptionTooLong"
+  | "confirmMismatch"
   | "unknown";
 
 /** Codes for success messages → Forms.success */

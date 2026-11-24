@@ -41,14 +41,15 @@ Never put the **secret** key in `.env.local` with a `NEXT_PUBLIC_` prefix, and n
 
 ## Everyday commands
 
-| Command            | What it does                                                               |
-| ------------------ | -------------------------------------------------------------------------- |
-| `npm run dev`      | Start the app at http://localhost:3000                                     |
-| `npm run check`    | Type check + lint + format check                                           |
-| `npm run build`    | Production build                                                           |
-| `npm run db:reset` | Rebuild the **local** database from migrations + seed (deletes local data) |
-| `npm run db:test`  | Run database security tests (pgTAP)                                        |
-| `npm run db:types` | Regenerate `src/types/database.ts` after a schema change                   |
+| Command            | What it does                                                                                                 |
+| ------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `npm run dev`      | Start the app at http://localhost:3000                                                                       |
+| `npm run check`    | Type check + lint + format check                                                                             |
+| `npm run build`    | Production build                                                                                             |
+| `npm run db:reset` | Rebuild the **local** database from migrations + seed (deletes local data)                                   |
+| `npm run db:test`  | Run database security tests (pgTAP)                                                                          |
+| `npm run db:types` | Regenerate `src/types/database.ts` after a schema change                                                     |
+| `npm run test:e2e` | Browser tests: auth, catalogue, diary, social, lists, account, SEO, accessibility (needs `npm run db:start`) |
 
 ## Project structure
 
@@ -80,3 +81,7 @@ Admins can upload fragrance images from the fragrance page. In the Supabase dash
 ```sql
 update public.profiles set is_admin = true where username = 'your_username';
 ```
+
+## Deployment
+
+See **docs/despliegue.md** (Spanish, step by step): Supabase URLs, custom SMTP (Resend), email templates, Vercel environment variables and domain.

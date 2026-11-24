@@ -129,7 +129,8 @@
       "reviewTooLong": "Use at most 10,000 characters.",
       "commentTooLong": "Use at most 2,000 characters.",
       "titleTooLong": "Use at most 120 characters.",
-      "descriptionTooLong": "Use at most 2,000 characters."
+      "descriptionTooLong": "Use at most 2,000 characters.",
+      "confirmMismatch": "Type your username exactly to confirm."
     },
     "success": {
       "checkEmail": "Almost there. We have sent a confirmation link to your email — open it to activate your account.",
@@ -163,7 +164,7 @@
       "submit": "Create account",
       "haveAccount": "Already have an account?",
       "signIn": "Sign in",
-      "terms": "By creating an account you agree to keep things kind and honest."
+      "terms": "By creating an account you accept the <terms>Terms of use</terms> and the <privacy>Privacy policy</privacy>. You must be 16 or over."
     },
     "forgot": {
       "metaTitle": "Reset password",
@@ -536,5 +537,30 @@
     "noRated": "Nothing has been rated yet.",
     "noReviews": "No reviews yet.",
     "noLists": "No public lists yet."
+  },
+  "Account": {
+    "dataTitle": "Your data",
+    "dataBody": "Download a copy of everything SCENTLOG stores about you: profile, diary, reviews, comments, lists and follows.",
+    "download": "Download my data (JSON)",
+    "deleteTitle": "Delete account",
+    "deleteBody": "This permanently deletes your account, diary, reviews, comments, lists, likes and photos. It cannot be undone.",
+    "deleteConfirmLabel": "Type “{username}” to confirm",
+    "deleteButton": "Delete my account permanently",
+    "deleted": "Your account and all your data have been deleted."
+  },
+  "Legal": {
+    "eyebrow": "Legal",
+    "updated": "Last updated: {date}",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies"
+  },
+  "Errors": {
+    "eyebrow": "Error",
+    "title": "Something went wrong.",
+    "body": "An unexpected error occurred. Please try again in a moment.",
+    "retry": "Try again",
+    "home": "Back to the homepage",
+    "reference": "Reference: {digest}"
   }
 }

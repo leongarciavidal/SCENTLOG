@@ -2,7 +2,7 @@ import path from "node:path";
 
 import { expect, test } from "@playwright/test";
 
-import { makeAdmin, signOut, signUpAndConfirm } from "./helpers";
+import { makeAdmin, signOut, signUpAndConfirm, accountMenu } from "./helpers";
 
 const cards = (page: import("@playwright/test").Page) => page.locator("main article");
 
@@ -125,7 +125,7 @@ test("admins can upload a fragrance image; others cannot see the panel", async (
   await page.getByLabel("Email").fill(user.email);
   await page.getByLabel("Password").fill(user.password);
   await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page.getByLabel("Account")).toBeVisible();
+  await expect(accountMenu(page)).toBeVisible();
   await page.goto("/en/fragrances/le-labo-santal-33-edp");
   await page
     .getByRole("form", { name: "Admin · Image" })

@@ -24,10 +24,8 @@ export async function UserMenu({
 
   return (
     <details className="group relative">
-      <summary
-        aria-label={t("account")}
-        className="flex cursor-pointer list-none items-center gap-2.5 [&::-webkit-details-marker]:hidden"
-      >
+      <summary className="flex cursor-pointer list-none items-center gap-2.5 [&::-webkit-details-marker]:hidden">
+        <span className="sr-only">{t("account")}:</span>
         <Avatar url={avatarUrl} name={displayName || username} size="sm" />
         <span className="hidden text-sm text-paper-muted transition-colors group-open:text-paper hover:text-paper md:inline">
           {username}

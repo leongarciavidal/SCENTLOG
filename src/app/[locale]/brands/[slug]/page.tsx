@@ -6,6 +6,7 @@ import { FragranceGrid } from "@/components/fragrance/FragranceGrid";
 import { Container } from "@/components/ui/Container";
 import { getBrandBySlug, getBrandFragrances } from "@/features/fragrances/queries";
 import type { Locale } from "@/i18n/routing";
+import { alternatesFor, openGraphFor } from "@/lib/seo";
 import { countryName, localized } from "@/lib/localized";
 
 type Props = PageProps<"/[locale]/brands/[slug]">;
@@ -14,7 +15,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const brand = await getBrandBySlug(slug);
   if (!brand) return {};
-  return { title: brand.name, description: localized(brand, "description", locale) ?? undefined };
+  return {
+    title: brand.name,
+    alternates: alternatesFor(locale, `/brands/${slug}`),
+    openGraph: openGraphFor(locale, { title: brand.name }),
+    description: localized(brand, "description", locale) ?? undefined,
+  };
 }
 
 export default async function BrandPage({ params }: Props) {

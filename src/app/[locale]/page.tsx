@@ -3,13 +3,21 @@ import { getFormatter, getTranslations, setRequestLocale } from "next-intl/serve
 import { FragranceCard } from "@/components/fragrance/FragranceCard";
 import { Container } from "@/components/ui/Container";
 import { getFeaturedFragrances } from "@/features/fragrances/queries";
+import type { Metadata } from "next";
+
 import { getRecentReviews } from "@/features/reviews/queries";
 import { Link } from "@/i18n/navigation";
+import { alternatesFor } from "@/lib/seo";
 import type { QueryResult } from "@/lib/result";
+
+export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
+  const { locale } = await params;
+  return { alternates: alternatesFor(locale, "") };
+}
 
 const PILLARS = ["log", "rate", "collect", "follow"] as const;
 
-export default async function HomePage({ params }: PageProps<"/[locale]">) {
+export default async function HomePage({ params, searchParams }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale as "en" | "es");
 
@@ -21,10 +29,20 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   ]);
 
   const items = fragrances.status === "ok" ? fragrances.data.items : [];
+  const accountDeleted = (await searchParams).accountDeleted === "1";
+  const ta = accountDeleted ? await getTranslations("Account") : null;
   const [lead, ...rest] = items;
 
   return (
     <>
+      {ta ? (
+        <p
+          role="status"
+          className="border-b border-line bg-ink-raised px-5 py-3 text-center text-sm text-paper-muted"
+        >
+          {ta("deleted")}
+        </p>
+      ) : null}
       {/* ------------------------------------------------------------------ Hero */}
       <section className="border-b border-line">
         <Container className="grid gap-14 pt-16 pb-20 sm:pt-24 lg:grid-cols-12 lg:gap-12 lg:pb-28">

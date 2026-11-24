@@ -13,6 +13,7 @@ import {
 import { catalogueQuery, parseCatalogueParams } from "@/features/fragrances/search-params";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { alternatesFor } from "@/lib/seo";
 import { localized } from "@/lib/localized";
 
 export async function generateMetadata({
@@ -20,7 +21,11 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/fragrances">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale: locale as Locale, namespace: "Catalogue" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: alternatesFor(locale, "/fragrances"),
+  };
 }
 
 export default async function CataloguePage({

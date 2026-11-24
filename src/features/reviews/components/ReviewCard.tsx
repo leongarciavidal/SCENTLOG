@@ -2,6 +2,7 @@ import { getFormatter, getTranslations } from "next-intl/server";
 
 import { Avatar } from "@/components/profile/Avatar";
 import { RatingStars } from "@/components/ui/RatingStars";
+import { getCurrentProfile } from "@/features/auth/session";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
@@ -31,6 +32,8 @@ export async function ReviewCard({
     getFormatter(),
   ]);
   const isOwn = viewerId === review.user_id;
+  // Admins can remove any review (moderation); only the author can edit it.
+  const canDelete = isOwn || Boolean(viewerId && (await getCurrentProfile())?.is_admin);
   const name = review.author.display_name || review.author.username;
   const rating =
     review.entry?.rating === null || review.entry?.rating === undefined
@@ -121,19 +124,19 @@ export async function ReviewCard({
             : `${t("comments", { count: review.comment_count })} · ${t("readMore")}`}
         </Link>
         {isOwn ? (
-          <>
-            <Link
-              href={`/fragrances/${review.fragrance.slug}#review`}
-              className="relative z-10 text-xs text-paper-faint hover:text-paper"
-            >
-              {t("editLink")}
-            </Link>
-            <DeleteButton
-              label={t("delete")}
-              confirm={t("deleteConfirm")}
-              action={deleteReview.bind(null, review.id)}
-            />
-          </>
+          <Link
+            href={`/fragrances/${review.fragrance.slug}#review`}
+            className="relative z-10 text-xs text-paper-faint hover:text-paper"
+          >
+            {t("editLink")}
+          </Link>
+        ) : null}
+        {canDelete ? (
+          <DeleteButton
+            label={t("delete")}
+            confirm={t("deleteConfirm")}
+            action={deleteReview.bind(null, review.id)}
+          />
         ) : null}
       </footer>
     </article>
