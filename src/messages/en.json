@@ -19,7 +19,8 @@
     "settings": "Settings",
     "signOut": "Sign out",
     "fragrances": "Fragrances",
-    "brands": "Brands"
+    "brands": "Brands",
+    "collection": "My collection"
   },
   "Home": {
     "heroEyebrow": "A diary of fragrance",
@@ -116,13 +117,18 @@
       "bioTooLong": "Use at most 500 characters.",
       "avatarInvalid": "Choose a JPG, PNG or WebP image.",
       "avatarTooLarge": "The image is too large.",
-      "unknown": "Something went wrong. Please try again."
+      "unknown": "Something went wrong. Please try again.",
+      "notesTooLong": "Use at most 2,000 characters.",
+      "dateInvalid": "Choose a valid date that is not in the future.",
+      "favoritesDuplicate": "Each fragrance can only appear once."
     },
     "success": {
       "checkEmail": "Almost there. We have sent a confirmation link to your email — open it to activate your account.",
       "resetEmailSent": "If an account exists for that email, a link to reset your password is on its way.",
       "passwordUpdated": "Your password has been updated.",
-      "profileSaved": "Profile saved."
+      "profileSaved": "Profile saved.",
+      "diarySaved": "Saved to your diary.",
+      "favoritesSaved": "Top four saved."
     },
     "submitting": "One moment…"
   },
@@ -179,11 +185,15 @@
       "following": "Following"
     },
     "topFour": "Top four",
-    "topFourEmptyOwn": "Your four favourite fragrances will appear here once your diary opens.",
+    "topFourEmptyOwn": "Pick your four favourite fragrances from your diary.",
     "topFourEmpty": "No favourites chosen yet.",
     "diary": "Diary",
-    "diaryEmptyOwn": "Your diary is empty. Logging fragrances arrives in the next update.",
-    "diaryEmpty": "Nothing in the diary yet."
+    "diaryEmptyOwn": "Your diary is empty. Find a fragrance in the catalogue and add it.",
+    "diaryEmpty": "Nothing in the diary yet.",
+    "editTopFour": "Edit top four",
+    "viewCollection": "View full collection",
+    "recent": "Recently added",
+    "browseCatalogue": "Browse the catalogue"
   },
   "Settings": {
     "metaTitle": "Edit profile",
@@ -199,7 +209,9 @@
     "viewProfile": "View profile",
     "security": "Security",
     "changePassword": "Change password",
-    "email": "Signed in as {email}"
+    "email": "Signed in as {email}",
+    "topFour": "Top four",
+    "editTopFour": "Choose your top four"
   },
   "Languages": {
     "en": "English",
@@ -290,5 +302,65 @@
     "remove": "Remove image",
     "creditRequired": "Add a credit or source for the image.",
     "forbidden": "Only admins can change catalogue images."
+  },
+  "Diary": {
+    "title": "Your diary",
+    "signInPrompt": "Sign in to add this fragrance to your diary.",
+    "signIn": "Sign in",
+    "join": "Create an account",
+    "status": "Status",
+    "statuses": {
+      "owned": "Owned",
+      "tested": "Tested",
+      "wishlist": "Wishlist",
+      "finished": "Finished"
+    },
+    "rating": "Your rating",
+    "ratingNone": "Not rated",
+    "ratingClear": "Clear rating",
+    "ratingStar": "{value, plural, one {# star} other {# stars}}",
+    "notes": "Personal notes",
+    "notesPlaceholder": "How it wears on you, when you reach for it, what it reminds you of…",
+    "date": "Date added",
+    "private": "Keep this entry private",
+    "privateHint": "Private entries only appear to you and are not shared in activity feeds.",
+    "save": "Add to diary",
+    "update": "Update entry",
+    "remove": "Remove from diary",
+    "removeConfirm": "Remove this fragrance from your diary? Its review (if any) will be deleted too.",
+    "inDiary": "In your diary",
+    "private_badge": "Private"
+  },
+  "Collection": {
+    "metaTitle": "{name}'s collection",
+    "eyebrow": "Collection",
+    "title": "{name}'s collection",
+    "titleOwn": "Your collection",
+    "all": "All",
+    "sort": "Sort by",
+    "sorts": {
+      "recent": "Recently added",
+      "rating": "Their rating",
+      "az": "A–Z"
+    },
+    "sortsOwn": {
+      "rating": "Your rating"
+    },
+    "count": "{count, plural, =0 {No fragrances} one {# fragrance} other {# fragrances}}",
+    "empty": "Nothing here yet.",
+    "emptyOwn": "Nothing here yet. Find a fragrance in the catalogue and add it to your diary.",
+    "browse": "Browse the catalogue",
+    "backToProfile": "Back to profile"
+  },
+  "Favorites": {
+    "metaTitle": "Top four",
+    "eyebrow": "Settings",
+    "title": "Your top four",
+    "intro": "Choose up to four fragrances from your diary to show at the top of your profile.",
+    "slot": "Favourite {position}",
+    "none": "— Empty —",
+    "save": "Save top four",
+    "emptyDiary": "Your diary is empty. Add fragrances to your diary first, then pick your favourites here.",
+    "browse": "Browse the catalogue"
   }
 }

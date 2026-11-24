@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 
 import { RatingStars } from "@/components/ui/RatingStars";
 import { Link } from "@/i18n/navigation";
@@ -13,13 +13,17 @@ export function FragranceCard({
   size = "default",
   priority,
   className,
+  meta,
 }: {
   fragrance: FragranceCardData;
   size?: "default" | "large";
   priority?: boolean;
   className?: string;
+  /** Replaces the community rating line (e.g. a user's own rating and status). */
+  meta?: React.ReactNode;
 }) {
   const t = useTranslations("Fragrance");
+  const format = useFormatter();
   const rating = fragrance.rating_avg === null ? null : Number(fragrance.rating_avg);
 
   return (
@@ -55,13 +59,20 @@ export function FragranceCard({
           {fragrance.release_year ? ` · ${fragrance.release_year}` : null}
         </p>
         <div className="mt-1 flex items-center gap-2 text-xs text-paper-faint">
-          {rating === null ? (
+          {meta ? (
+            meta
+          ) : rating === null ? (
             <span>{t("notRated")}</span>
           ) : (
             <>
               <RatingStars
                 rating={rating}
-                label={t("ratingLabel", { rating: rating.toFixed(1) })}
+                label={t("ratingLabel", {
+                  rating: format.number(rating, {
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 1,
+                  }),
+                })}
               />
               <span className="tabular-nums">
                 {t("ratingCount", { count: fragrance.rating_count })}

@@ -23,10 +23,19 @@ export type ErrorCode =
   | "bioTooLong"
   | "avatarInvalid"
   | "avatarTooLarge"
+  | "notesTooLong"
+  | "dateInvalid"
+  | "favoritesDuplicate"
   | "unknown";
 
 /** Codes for success messages → Forms.success */
-export type SuccessCode = "checkEmail" | "resetEmailSent" | "passwordUpdated" | "profileSaved";
+export type SuccessCode =
+  | "checkEmail"
+  | "resetEmailSent"
+  | "passwordUpdated"
+  | "profileSaved"
+  | "diarySaved"
+  | "favoritesSaved";
 
 /** State returned by every form Server Action (used with React's useActionState). */
 export type FormState<Field extends string = string> = {

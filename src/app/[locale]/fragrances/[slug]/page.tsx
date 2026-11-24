@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 
 import { FragranceArtwork } from "@/components/fragrance/FragranceArtwork";
 import { FragranceGrid } from "@/components/fragrance/FragranceGrid";
 import { Container } from "@/components/ui/Container";
 import { RatingStars } from "@/components/ui/RatingStars";
+import { buttonClasses } from "@/components/ui/Button";
 import { getCurrentProfile } from "@/features/auth/session";
+import { DiaryPanel } from "@/features/diary/components/DiaryPanel";
+import { getMyDiaryEntry } from "@/features/diary/queries";
 import { FragranceImageAdmin } from "@/features/fragrances/components/FragranceImageAdmin";
 import { NotesPyramid } from "@/features/fragrances/components/NotesPyramid";
 import {
@@ -52,11 +55,15 @@ export default async function FragrancePage({ params }: Props) {
     getCurrentProfile(),
     getFragranceReviews(fragrance.id),
   ]);
-  const moreFromBrand = await getMoreFromBrand(fragrance.brand_id, [
-    fragrance.id,
-    ...editions.map((e) => e.id),
+  const [moreFromBrand, diaryEntry, td] = await Promise.all([
+    getMoreFromBrand(fragrance.brand_id, [fragrance.id, ...editions.map((e) => e.id)]),
+    profile ? getMyDiaryEntry(profile.id, fragrance.id) : null,
+    getTranslations("Diary"),
   ]);
 
+  const format = await getFormatter();
+  const oneDecimal = (n: number) =>
+    format.number(n, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   const description = localized(fragrance, "description", locale);
   const rating = fragrance.rating_avg === null ? null : Number(fragrance.rating_avg);
   const perfumers = fragrance.perfumers.map((p) => p.perfumer).filter(Boolean);
@@ -116,10 +123,10 @@ export default async function FragrancePage({ params }: Props) {
                 <span className="text-sm text-paper-faint">{tr("notRated")}</span>
               ) : (
                 <span className="flex items-center gap-3">
-                  <span className="font-serif text-3xl tabular-nums">{rating.toFixed(1)}</span>
+                  <span className="font-serif text-3xl tabular-nums">{oneDecimal(rating)}</span>
                   <RatingStars
                     rating={rating}
-                    label={tr("ratingLabel", { rating: rating.toFixed(1) })}
+                    label={tr("ratingLabel", { rating: oneDecimal(rating) })}
                   />
                   <span className="text-xs text-paper-faint">
                     {tr("ratingCount", { count: fragrance.rating_count })}
@@ -174,6 +181,31 @@ export default async function FragrancePage({ params }: Props) {
               </h2>
               <NotesPyramid notes={fragrance.notes} />
             </section>
+
+            {/* -------------------------------------------------------- Diary */}
+            {profile ? (
+              <DiaryPanel
+                fragranceId={fragrance.id}
+                entry={diaryEntry}
+                today={new Date().toISOString().slice(0, 10)}
+              />
+            ) : (
+              <div className="flex flex-col items-start gap-5 border border-line-strong p-6 sm:p-8">
+                <h2 className="font-serif text-3xl">{td("title")}</h2>
+                <p className="text-paper-muted">{td("signInPrompt")}</p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href={`/login?next=${encodeURIComponent(`/${locale}/fragrances/${fragrance.slug}`)}`}
+                    className={buttonClasses("primary")}
+                  >
+                    {td("signIn")}
+                  </Link>
+                  <Link href="/signup" className={buttonClasses("secondary")}>
+                    {td("join")}
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
         </Container>
       </section>

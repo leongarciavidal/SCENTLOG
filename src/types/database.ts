@@ -478,6 +478,9 @@ isOneToOne: false
                            },
 "refresh_fragrance_diary_stats":
 { Args: { "target": string }; Returns: undefined
+                           },
+"set_profile_favorites":
+{ Args: { "fragrance_ids": (string)[] }; Returns: undefined
                            }
           }
           Enums: {

@@ -19,7 +19,8 @@
     "settings": "Ajustes",
     "signOut": "Cerrar sesión",
     "fragrances": "Perfumes",
-    "brands": "Marcas"
+    "brands": "Marcas",
+    "collection": "Mi colección"
   },
   "Home": {
     "heroEyebrow": "Un diario de perfumes",
@@ -116,13 +117,18 @@
       "bioTooLong": "Usa como máximo 500 caracteres.",
       "avatarInvalid": "Elige una imagen JPG, PNG o WebP.",
       "avatarTooLarge": "La imagen es demasiado grande.",
-      "unknown": "Algo ha fallado. Inténtalo de nuevo."
+      "unknown": "Algo ha fallado. Inténtalo de nuevo.",
+      "notesTooLong": "Usa como máximo 2.000 caracteres.",
+      "dateInvalid": "Elige una fecha válida que no sea futura.",
+      "favoritesDuplicate": "Cada perfume solo puede aparecer una vez."
     },
     "success": {
       "checkEmail": "Casi listo. Te hemos enviado un enlace de confirmación por email: ábrelo para activar tu cuenta.",
       "resetEmailSent": "Si existe una cuenta con ese email, te llegará un enlace para restablecer la contraseña.",
       "passwordUpdated": "Tu contraseña se ha actualizado.",
-      "profileSaved": "Perfil guardado."
+      "profileSaved": "Perfil guardado.",
+      "diarySaved": "Guardado en tu diario.",
+      "favoritesSaved": "Top cuatro guardado."
     },
     "submitting": "Un momento…"
   },
@@ -179,11 +185,15 @@
       "following": "Siguiendo"
     },
     "topFour": "Top cuatro",
-    "topFourEmptyOwn": "Tus cuatro perfumes favoritos aparecerán aquí cuando se abra tu diario.",
+    "topFourEmptyOwn": "Elige tus cuatro perfumes favoritos de tu diario.",
     "topFourEmpty": "Todavía no ha elegido favoritos.",
     "diary": "Diario",
-    "diaryEmptyOwn": "Tu diario está vacío. Registrar perfumes llega en la próxima actualización.",
-    "diaryEmpty": "Todavía no hay nada en el diario."
+    "diaryEmptyOwn": "Tu diario está vacío. Busca un perfume en el catálogo y añádelo.",
+    "diaryEmpty": "Todavía no hay nada en el diario.",
+    "editTopFour": "Editar top cuatro",
+    "viewCollection": "Ver colección completa",
+    "recent": "Añadidos recientemente",
+    "browseCatalogue": "Explorar el catálogo"
   },
   "Settings": {
     "metaTitle": "Editar perfil",
@@ -199,7 +209,9 @@
     "viewProfile": "Ver perfil",
     "security": "Seguridad",
     "changePassword": "Cambiar contraseña",
-    "email": "Sesión iniciada como {email}"
+    "email": "Sesión iniciada como {email}",
+    "topFour": "Top cuatro",
+    "editTopFour": "Elegir tu top cuatro"
   },
   "Languages": {
     "en": "English",
@@ -290,5 +302,65 @@
     "remove": "Quitar imagen",
     "creditRequired": "Añade el crédito o la fuente de la imagen.",
     "forbidden": "Solo los administradores pueden cambiar las imágenes del catálogo."
+  },
+  "Diary": {
+    "title": "Tu diario",
+    "signInPrompt": "Entra para añadir este perfume a tu diario.",
+    "signIn": "Entrar",
+    "join": "Crear una cuenta",
+    "status": "Estado",
+    "statuses": {
+      "owned": "Lo tengo",
+      "tested": "Probado",
+      "wishlist": "Deseado",
+      "finished": "Terminado"
+    },
+    "rating": "Tu puntuación",
+    "ratingNone": "Sin puntuar",
+    "ratingClear": "Quitar puntuación",
+    "ratingStar": "{value, plural, one {# estrella} other {# estrellas}}",
+    "notes": "Notas personales",
+    "notesPlaceholder": "Cómo te queda, cuándo lo eliges, qué te recuerda…",
+    "date": "Fecha",
+    "private": "Mantener esta entrada privada",
+    "privateHint": "Las entradas privadas solo las ves tú y no aparecen en la actividad.",
+    "save": "Añadir al diario",
+    "update": "Actualizar entrada",
+    "remove": "Quitar del diario",
+    "removeConfirm": "¿Quitar este perfume de tu diario? Su reseña (si la hay) también se borrará.",
+    "inDiary": "En tu diario",
+    "private_badge": "Privado"
+  },
+  "Collection": {
+    "metaTitle": "Colección de {name}",
+    "eyebrow": "Colección",
+    "title": "Colección de {name}",
+    "titleOwn": "Tu colección",
+    "all": "Todos",
+    "sort": "Ordenar por",
+    "sorts": {
+      "recent": "Añadidos recientemente",
+      "rating": "Su puntuación",
+      "az": "A–Z"
+    },
+    "sortsOwn": {
+      "rating": "Tu puntuación"
+    },
+    "count": "{count, plural, =0 {Ningún perfume} one {# perfume} other {# perfumes}}",
+    "empty": "Todavía no hay nada aquí.",
+    "emptyOwn": "Todavía no hay nada aquí. Busca un perfume en el catálogo y añádelo a tu diario.",
+    "browse": "Explorar el catálogo",
+    "backToProfile": "Volver al perfil"
+  },
+  "Favorites": {
+    "metaTitle": "Top cuatro",
+    "eyebrow": "Ajustes",
+    "title": "Tu top cuatro",
+    "intro": "Elige hasta cuatro perfumes de tu diario para mostrarlos en lo alto de tu perfil.",
+    "slot": "Favorito {position}",
+    "none": "— Vacío —",
+    "save": "Guardar top cuatro",
+    "emptyDiary": "Tu diario está vacío. Primero añade perfumes a tu diario y luego elige aquí tus favoritos.",
+    "browse": "Explorar el catálogo"
   }
 }

@@ -61,3 +61,17 @@ A short log of the important choices and why they were made.
 **Images from local Supabase (127.0.0.1)** skip Next's optimiser, which blocks private IPs for security. Images from hosted Supabase are optimised normally.
 
 **Brand countries are ISO codes (`FR`)**, shown in the user's language with `Intl.DisplayNames`.
+
+## 2026-11 — Milestone 4 (personal diary)
+
+**One diary entry per user and fragrance**, holding status (owned, tested, wishlist, finished), an optional 0.5–5 rating, private notes, a date and a private flag. Saving checks whether the entry exists, then updates it or inserts it. An upsert is not used because it would also try to write `user_id` / `fragrance_id`, which users have no permission to change.
+
+**The rating input uses real radio buttons** (two halves per star). It works with keyboard arrows, screen readers and without JavaScript.
+
+**Private entries** are hidden by RLS from everyone but their owner. That covers collections, stats and activity, and the tests check it.
+
+**The top four is saved through the RPC `set_profile_favorites(uuid[])`.** It replaces the list atomically (max 4, no duplicates) and runs as the caller, so RLS applies.
+
+**Collections live at `/[username]/collection`**, with status tabs and sorting. The diary stats on a profile link to the matching tab.
+
+**Numbers use each language's format** ("4,5" in Spanish, "4.5" in English) through next-intl.

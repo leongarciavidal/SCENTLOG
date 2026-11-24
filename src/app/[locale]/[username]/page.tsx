@@ -3,11 +3,14 @@ import { notFound } from "next/navigation";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 
 import { FragranceArtwork } from "@/components/fragrance/FragranceArtwork";
+import { FragranceCard } from "@/components/fragrance/FragranceCard";
 import { Avatar } from "@/components/profile/Avatar";
 import { buttonClasses } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { USERNAME_PATTERN } from "@/features/auth/constants";
 import { getCurrentUser } from "@/features/auth/session";
+import { DiaryEntryMeta } from "@/features/diary/components/DiaryEntryMeta";
+import { getRecentEntries } from "@/features/diary/queries";
 import {
   getProfileByUsername,
   getProfileFavorites,
@@ -46,12 +49,13 @@ export default async function ProfilePage({ params }: Props) {
   const profile = await loadProfile(username);
   if (!profile) notFound();
 
-  const [t, format, viewer, stats, favorites] = await Promise.all([
+  const [t, format, viewer, stats, favorites, recent] = await Promise.all([
     getTranslations("Profile"),
     getFormatter(),
     getCurrentUser(),
     getProfileStats(profile.id),
     getProfileFavorites(profile.id),
+    getRecentEntries(profile.id, 8),
   ]);
   const isOwn = viewer?.id === profile.id;
   const name = profile.display_name || profile.username;
@@ -96,7 +100,15 @@ export default async function ProfilePage({ params }: Props) {
       <section className="border-b border-line">
         <Container>
           <div className="grid grid-cols-2 gap-px bg-line sm:grid-cols-4 lg:grid-cols-8">
-            {[...DIARY_STATS, ...SOCIAL_STATS].map((key) => (
+            {DIARY_STATS.map((key) => (
+              <Stat
+                key={key}
+                label={t(`stats.${key}`)}
+                value={stats[key]}
+                href={`/${profile.username}/collection?status=${key}`}
+              />
+            ))}
+            {SOCIAL_STATS.map((key) => (
               <Stat key={key} label={t(`stats.${key}`)} value={stats[key as keyof ProfileStats]} />
             ))}
           </div>
@@ -106,23 +118,36 @@ export default async function ProfilePage({ params }: Props) {
       {/* ------------------------------------------------------------ Top four */}
       <section aria-labelledby="top-four">
         <Container className="py-16 sm:py-20">
-          <h2 id="top-four" className="eyebrow mb-8 border-b border-line pb-4">
-            {t("topFour")}
-          </h2>
+          <div className="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
+            <h2 id="top-four" className="eyebrow">
+              {t("topFour")}
+            </h2>
+            {isOwn ? (
+              <Link href="/settings/favorites" className="link-underline text-xs text-paper-muted">
+                {t("editTopFour")}
+              </Link>
+            ) : null}
+          </div>
           <ol className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
             {[1, 2, 3, 4].map((position) => {
               const fragrance = favorites.find((f) => f.position === position)?.fragrance;
               return (
                 <li key={position}>
                   {fragrance ? (
-                    <FragranceArtwork
-                      name={fragrance.name}
-                      brand={fragrance.brand.name}
-                      concentrationShort={fragrance.concentration.toUpperCase()}
-                      year={fragrance.release_year}
-                      imageUrl={fragrance.image_url}
-                      familySlug={fragrance.family?.slug}
-                    />
+                    <Link
+                      href={`/fragrances/${fragrance.slug}`}
+                      className="group block"
+                      aria-label={`${fragrance.brand.name} ${fragrance.name}`}
+                    >
+                      <FragranceArtwork
+                        name={fragrance.name}
+                        brand={fragrance.brand.name}
+                        concentrationShort={fragrance.concentration.toUpperCase()}
+                        year={fragrance.release_year}
+                        imageUrl={fragrance.image_url}
+                        familySlug={fragrance.family?.slug}
+                      />
+                    </Link>
                   ) : (
                     <div className="flex aspect-[4/5] items-end border border-dashed border-line-strong p-4">
                       <span className="font-serif text-3xl text-paper-faint">{position}</span>
@@ -143,23 +168,66 @@ export default async function ProfilePage({ params }: Props) {
       {/* --------------------------------------------------------------- Diary */}
       <section aria-labelledby="diary" className="border-t border-line">
         <Container className="py-16 sm:py-20">
-          <h2 id="diary" className="eyebrow mb-8 border-b border-line pb-4">
-            {t("diary")}
-          </h2>
-          <p className="max-w-lg font-serif text-2xl leading-snug text-paper-muted italic">
-            {isOwn ? t("diaryEmptyOwn") : t("diaryEmpty")}
-          </p>
+          <div className="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
+            <h2 id="diary" className="eyebrow">
+              {t("recent")}
+            </h2>
+            {recent.length > 0 ? (
+              <Link
+                href={`/${profile.username}/collection`}
+                className="link-underline text-xs text-paper-muted"
+              >
+                {t("viewCollection")}
+              </Link>
+            ) : null}
+          </div>
+          {recent.length === 0 ? (
+            <div className="flex flex-col items-start gap-6">
+              <p className="max-w-lg font-serif text-2xl leading-snug text-paper-muted italic">
+                {isOwn ? t("diaryEmptyOwn") : t("diaryEmpty")}
+              </p>
+              {isOwn ? (
+                <Link href="/fragrances" className={buttonClasses("secondary")}>
+                  {t("browseCatalogue")}
+                </Link>
+              ) : null}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-x-4 gap-y-14 sm:gap-x-6 lg:grid-cols-4">
+              {recent.map((entry) => (
+                <FragranceCard
+                  key={entry.id}
+                  fragrance={entry.fragrance}
+                  meta={
+                    <DiaryEntryMeta
+                      rating={entry.rating === null ? null : Number(entry.rating)}
+                      status={entry.status}
+                      isPrivate={entry.is_private}
+                    />
+                  }
+                />
+              ))}
+            </div>
+          )}
         </Container>
       </section>
     </>
   );
 }
 
-function Stat({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="flex flex-col gap-2 bg-ink px-4 py-6 sm:px-5">
+function Stat({ label, value, href }: { label: string; value: number; href?: string }) {
+  const content = (
+    <>
       <span className="font-serif text-4xl tabular-nums">{value}</span>
       <span className="text-[0.6875rem] tracking-[0.18em] text-paper-faint uppercase">{label}</span>
-    </div>
+    </>
+  );
+  const className = "flex flex-col gap-2 bg-ink px-4 py-6 sm:px-5";
+  return href ? (
+    <Link href={href} className={`${className} transition-colors hover:bg-ink-raised`}>
+      {content}
+    </Link>
+  ) : (
+    <div className={className}>{content}</div>
   );
 }

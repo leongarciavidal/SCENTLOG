@@ -57,6 +57,13 @@ export default async function SettingsProfilePage({
           />
 
           <section className="flex flex-col gap-5 border-t border-line pt-10">
+            <h2 className="eyebrow text-paper">{t("topFour")}</h2>
+            <Link href="/settings/favorites" className={buttonClasses("secondary", "self-start")}>
+              {t("editTopFour")}
+            </Link>
+          </section>
+
+          <section className="flex flex-col gap-5 border-t border-line pt-10">
             <h2 className="eyebrow text-paper">{t("security")}</h2>
             {user.email ? (
               <p className="text-sm text-paper-muted">{t("email", { email: user.email })}</p>
