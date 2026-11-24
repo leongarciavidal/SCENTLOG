@@ -75,3 +75,15 @@ A short log of the important choices and why they were made.
 **Collections live at `/[username]/collection`**, with status tabs and sorting. The diary stats on a profile link to the matching tab.
 
 **Numbers use each language's format** ("4,5" in Spanish, "4.5" in English) through next-intl.
+
+## 2026-11 — Milestone 5 (reviews and social)
+
+**Reviews hang off diary entries.** The star rating shown on a review is the author's diary rating, so there is one rating per user and fragrance. If the user has no diary entry yet, publishing a review creates one as "Tested", which avoids a confusing extra step. Removing the diary entry also removes the review, and the confirmation dialog says so.
+
+**Likes and follows update optimistically** (`useOptimistic`): the UI changes instantly and the server confirms. Users cannot like their own reviews from the UI.
+
+**The activity feed uses the RPC `feed_events(page_size, before_id)`.** It runs as the caller (so RLS hides private items), pages with keyset pagination on the event id (stable and fast as the feed grows) and returns `setof activity_events`, so the related actor, fragrance, diary entry and review come back in the same request. Events are still created only by database triggers.
+
+**Your own feed items use second-person phrasing** ("Tú reseñaste…") so Spanish grammar stays correct.
+
+**Comments can be deleted only by their author** (RLS). Moderation tools and reporting are planned for launch preparation.

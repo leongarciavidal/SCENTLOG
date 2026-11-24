@@ -467,7 +467,25 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "is_admin":
+            "feed_events":
+{ Args: { "before_id"?: number,"page_size"?: number }; Returns: {
+              "actor_id": string,
+"created_at": string,
+"fragrance_id": string | null,
+"id": number,
+"list_id": string | null,
+"review_id": string | null,
+"target_user_id": string | null,
+"type": Database["public"]['Enums']["activity_type"],
+"user_fragrance_id": string | null
+            }[]
+                          SetofOptions: {
+        from: "*"
+        to: "activity_events"
+        isOneToOne: false
+        isSetofReturn: true
+      } },
+"is_admin":
 { Args: Record<PropertyKey, never>; Returns: boolean
                            },
 "is_reserved_username":

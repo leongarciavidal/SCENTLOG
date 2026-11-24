@@ -199,19 +199,6 @@ export async function getMoreFromBrand(brandId: string, excludeIds: string[], li
   return data ?? [];
 }
 
-export async function getFragranceReviews(fragranceId: string, limit = 10) {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("reviews")
-    .select(
-      "id, body, created_at, like_count, author:profiles!reviews_user_id_fkey ( username, display_name, avatar_url )",
-    )
-    .eq("fragrance_id", fragranceId)
-    .order("created_at", { ascending: false })
-    .limit(limit);
-  return data ?? [];
-}
-
 // ---------------------------------------------------------------------------
 // Brands & perfumers
 // ---------------------------------------------------------------------------

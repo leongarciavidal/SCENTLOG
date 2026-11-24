@@ -20,7 +20,8 @@
     "signOut": "Cerrar sesión",
     "fragrances": "Perfumes",
     "brands": "Marcas",
-    "collection": "Mi colección"
+    "collection": "Mi colección",
+    "feed": "Actividad"
   },
   "Home": {
     "heroEyebrow": "Un diario de perfumes",
@@ -120,7 +121,9 @@
       "unknown": "Algo ha fallado. Inténtalo de nuevo.",
       "notesTooLong": "Usa como máximo 2.000 caracteres.",
       "dateInvalid": "Elige una fecha válida que no sea futura.",
-      "favoritesDuplicate": "Cada perfume solo puede aparecer una vez."
+      "favoritesDuplicate": "Cada perfume solo puede aparecer una vez.",
+      "reviewTooLong": "Usa como máximo 10.000 caracteres.",
+      "commentTooLong": "Usa como máximo 2.000 caracteres."
     },
     "success": {
       "checkEmail": "Casi listo. Te hemos enviado un enlace de confirmación por email: ábrelo para activar tu cuenta.",
@@ -128,7 +131,9 @@
       "passwordUpdated": "Tu contraseña se ha actualizado.",
       "profileSaved": "Perfil guardado.",
       "diarySaved": "Guardado en tu diario.",
-      "favoritesSaved": "Top cuatro guardado."
+      "favoritesSaved": "Top cuatro guardado.",
+      "reviewSaved": "Reseña publicada.",
+      "commentAdded": "Comentario publicado."
     },
     "submitting": "Un momento…"
   },
@@ -193,7 +198,9 @@
     "editTopFour": "Editar top cuatro",
     "viewCollection": "Ver colección completa",
     "recent": "Añadidos recientemente",
-    "browseCatalogue": "Explorar el catálogo"
+    "browseCatalogue": "Explorar el catálogo",
+    "reviewsTitle": "Reseñas recientes",
+    "viewAllReviews": "Todas las reseñas"
   },
   "Settings": {
     "metaTitle": "Editar perfil",
@@ -269,7 +276,7 @@
     "moreFrom": "Más de {brand}",
     "viewBrand": "Todos los perfumes de {brand}",
     "reviews": "Reseñas",
-    "reviewsEmpty": "Todavía no hay reseñas. Escribir reseñas llega en una próxima actualización.",
+    "reviewsEmpty": "Todavía no hay reseñas. Sé la primera persona en escribir una.",
     "imageCredit": "Imagen: {credit}",
     "originalOf": "Original",
     "flanker": "Edición de {name}"
@@ -362,5 +369,87 @@
     "save": "Guardar top cuatro",
     "emptyDiary": "Tu diario está vacío. Primero añade perfumes a tu diario y luego elige aquí tus favoritos.",
     "browse": "Explorar el catálogo"
+  },
+  "Reviews": {
+    "write": "Escribe una reseña",
+    "edit": "Tu reseña",
+    "bodyLabel": "Reseña",
+    "bodyPlaceholder": "¿Cómo huele en ti? ¿Cómo evoluciona, cuándo lo llevarías?",
+    "dimensionsTitle": "Valoraciones opcionales",
+    "dimensions": {
+      "longevity": "Duración",
+      "projection": "Proyección",
+      "sillage": "Estela",
+      "versatility": "Versatilidad",
+      "value": "Calidad-precio"
+    },
+    "dimensionNone": "–",
+    "publish": "Publicar reseña",
+    "update": "Actualizar reseña",
+    "delete": "Borrar reseña",
+    "deleteConfirm": "¿Borrar esta reseña? Se perderán sus likes y comentarios.",
+    "autoDiary": "Al publicarla, el perfume se añade a tu diario como «Probado» si aún no está.",
+    "signInPrompt": "Entra para escribir una reseña.",
+    "by": "Reseña de {name}",
+    "edited": "editada",
+    "likes": "{count, plural, =0 {Sin likes} one {# like} other {# likes}}",
+    "like": "Me gusta",
+    "unlike": "Quitar me gusta",
+    "comments": "{count, plural, =0 {Sin comentarios} one {# comentario} other {# comentarios}}",
+    "readMore": "Leer reseña",
+    "editLink": "Editar",
+    "commentsTitle": "Comentarios",
+    "commentLabel": "Añade un comentario",
+    "commentPlaceholder": "Sé amable y concreto.",
+    "postComment": "Publicar comentario",
+    "deleteComment": "Borrar",
+    "commentSignIn": "Entra para comentar.",
+    "noComments": "Todavía no hay comentarios.",
+    "metaTitle": "Reseña de {name} sobre {fragrance}",
+    "userReviewsTitle": "Reseñas de {name}",
+    "userReviewsTitleOwn": "Tus reseñas",
+    "userReviewsEmpty": "Todavía no hay reseñas."
+  },
+  "Social": {
+    "follow": "Seguir",
+    "following": "Siguiendo",
+    "unfollow": "Dejar de seguir",
+    "followers": "Seguidores",
+    "followingTitle": "Siguiendo",
+    "followersTitle": "Seguidores de {name}",
+    "followingPageTitle": "Personas que sigue {name}",
+    "emptyFollowers": "Todavía no tiene seguidores.",
+    "emptyFollowing": "Todavía no sigue a nadie.",
+    "followsYou": "Te sigue"
+  },
+  "Feed": {
+    "metaTitle": "Actividad",
+    "eyebrow": "Tu feed",
+    "title": "Actividad",
+    "intro": "Lo que registran, reseñan y descubren las personas a las que sigues.",
+    "diary": {
+      "owned": "añadió <f>{fragrance}</f> a su colección",
+      "tested": "probó <f>{fragrance}</f>",
+      "wishlist": "desea <f>{fragrance}</f>",
+      "finished": "terminó un frasco de <f>{fragrance}</f>"
+    },
+    "review": "reseñó <f>{fragrance}</f>",
+    "list": "creó una lista",
+    "follow": "empezó a seguir a <u>{user}</u>",
+    "you": "Tú",
+    "empty": "Tu feed está tranquilo. Sigue a personas para ver qué llevan.",
+    "emptyHint": "Encuentra gente a través de las reseñas de cualquier perfume.",
+    "browse": "Explorar perfumes",
+    "older": "Actividad anterior",
+    "self": {
+      "diary": {
+        "owned": "añadiste <f>{fragrance}</f> a tu colección",
+        "tested": "probaste <f>{fragrance}</f>",
+        "wishlist": "deseas <f>{fragrance}</f>",
+        "finished": "terminaste un frasco de <f>{fragrance}</f>"
+      },
+      "review": "reseñaste <f>{fragrance}</f>",
+      "follow": "empezaste a seguir a <u>{user}</u>"
+    }
   }
 }

@@ -149,7 +149,11 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                   className="flex flex-col gap-4 bg-ink py-8 lg:px-8 lg:first:pl-0"
                 >
                   <p className="eyebrow">{review.fragrance.brand.name}</p>
-                  <h3 className="font-serif text-2xl">{review.fragrance.name}</h3>
+                  <h3 className="font-serif text-2xl">
+                    <Link href={`/reviews/${review.id}`} className="hover:text-paper-muted">
+                      {review.fragrance.name}
+                    </Link>
+                  </h3>
                   <p className="line-clamp-5 text-sm leading-relaxed text-paper-muted">
                     {review.body}
                   </p>

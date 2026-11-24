@@ -10,11 +10,13 @@ import { buttonClasses } from "@/components/ui/Button";
 import { getCurrentProfile } from "@/features/auth/session";
 import { DiaryPanel } from "@/features/diary/components/DiaryPanel";
 import { getMyDiaryEntry } from "@/features/diary/queries";
+import { ReviewCard } from "@/features/reviews/components/ReviewCard";
+import { ReviewEditor } from "@/features/reviews/components/ReviewEditor";
+import { getFragranceReviews, getLikedReviewIds, getMyReview } from "@/features/reviews/queries";
 import { FragranceImageAdmin } from "@/features/fragrances/components/FragranceImageAdmin";
 import { NotesPyramid } from "@/features/fragrances/components/NotesPyramid";
 import {
   getFragranceBySlug,
-  getFragranceReviews,
   getMoreFromBrand,
   getRelatedEditions,
 } from "@/features/fragrances/queries";
@@ -55,10 +57,16 @@ export default async function FragrancePage({ params }: Props) {
     getCurrentProfile(),
     getFragranceReviews(fragrance.id),
   ]);
-  const [moreFromBrand, diaryEntry, td] = await Promise.all([
+  const [moreFromBrand, diaryEntry, td, tReviews, myReview, likedIds] = await Promise.all([
     getMoreFromBrand(fragrance.brand_id, [fragrance.id, ...editions.map((e) => e.id)]),
     profile ? getMyDiaryEntry(profile.id, fragrance.id) : null,
     getTranslations("Diary"),
+    getTranslations("Reviews"),
+    profile ? getMyReview(profile.id, fragrance.id) : null,
+    getLikedReviewIds(
+      profile?.id,
+      reviews.map((r) => r.id),
+    ),
   ]);
 
   const format = await getFormatter();
@@ -219,27 +227,36 @@ export default async function FragrancePage({ params }: Props) {
 
       {/* ---------------------------------------------------------- Reviews */}
       <Section title={t("reviews")}>
-        {reviews.length === 0 ? (
-          <p className="max-w-lg font-serif text-2xl leading-snug text-paper-muted italic">
-            {t("reviewsEmpty")}
-          </p>
-        ) : (
-          <ul className="flex flex-col divide-y divide-line">
-            {reviews.map((review) => (
-              <li key={review.id} className="flex flex-col gap-3 py-6">
-                <Link
-                  href={`/${review.author.username}`}
-                  className="eyebrow self-start hover:text-paper"
-                >
-                  {review.author.display_name || review.author.username}
-                </Link>
-                <p className="max-w-2xl leading-relaxed whitespace-pre-line text-paper-muted">
-                  {review.body}
-                </p>
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className="flex flex-col gap-10">
+          {profile ? (
+            <ReviewEditor fragranceId={fragrance.id} existing={myReview} />
+          ) : (
+            <p className="text-sm text-paper-muted">
+              <Link
+                href={`/login?next=${encodeURIComponent(`/${locale}/fragrances/${fragrance.slug}`)}`}
+                className="link-underline text-paper"
+              >
+                {tReviews("signInPrompt")}
+              </Link>
+            </p>
+          )}
+          {reviews.length === 0 ? (
+            <p className="max-w-lg font-serif text-2xl leading-snug text-paper-muted italic">
+              {t("reviewsEmpty")}
+            </p>
+          ) : (
+            <div className="flex flex-col divide-y divide-line border-t border-line">
+              {reviews.map((review) => (
+                <ReviewCard
+                  key={review.id}
+                  review={review}
+                  liked={likedIds.has(review.id)}
+                  viewerId={profile?.id ?? null}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </Section>
 
       {/* ---------------------------------------------------- More from brand */}

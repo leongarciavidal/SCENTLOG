@@ -36,6 +36,14 @@ export async function SiteHeader() {
             >
               {t("brands")}
             </Link>
+            {profile ? (
+              <Link
+                href="/feed"
+                className="hidden text-sm text-paper-muted transition-colors hover:text-paper sm:inline"
+              >
+                {t("feed")}
+              </Link>
+            ) : null}
           </nav>
           <LocaleSwitcher className="hidden sm:flex" />
           {profile ? (

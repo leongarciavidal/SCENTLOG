@@ -37,6 +37,9 @@ export async function UserMenu({
         <Link href={`/${username}`} className={itemClass}>
           {t("profile")}
         </Link>
+        <Link href="/feed" className={itemClass}>
+          {t("feed")}
+        </Link>
         <Link href={`/${username}/collection`} className={itemClass}>
           {t("collection")}
         </Link>

@@ -10,7 +10,7 @@ test("visitors are invited to sign in and come back to the fragrance", async ({ 
 
   await page.goto("/en/fragrances/diptyque-tam-dao-edt");
   await expect(diaryForm(page)).toHaveCount(0);
-  await page.locator("main").getByRole("link", { name: "Sign in" }).click();
+  await page.locator("main").getByRole("link", { name: "Sign in", exact: true }).click();
   await page.getByLabel("Email").fill(user.email);
   await page.getByLabel("Password").fill(user.password);
   await page.getByRole("button", { name: "Sign in" }).click();

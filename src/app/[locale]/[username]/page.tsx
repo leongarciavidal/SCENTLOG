@@ -11,6 +11,10 @@ import { USERNAME_PATTERN } from "@/features/auth/constants";
 import { getCurrentUser } from "@/features/auth/session";
 import { DiaryEntryMeta } from "@/features/diary/components/DiaryEntryMeta";
 import { getRecentEntries } from "@/features/diary/queries";
+import { ReviewCard } from "@/features/reviews/components/ReviewCard";
+import { getLikedReviewIds, getUserReviews } from "@/features/reviews/queries";
+import { FollowButton } from "@/features/social/components/FollowButton";
+import { isFollowing } from "@/features/social/queries";
 import {
   getProfileByUsername,
   getProfileFavorites,
@@ -49,13 +53,21 @@ export default async function ProfilePage({ params }: Props) {
   const profile = await loadProfile(username);
   if (!profile) notFound();
 
-  const [t, format, viewer, stats, favorites, recent] = await Promise.all([
+  const [t, format, viewer, stats, favorites, recent, reviews] = await Promise.all([
     getTranslations("Profile"),
     getFormatter(),
     getCurrentUser(),
     getProfileStats(profile.id),
     getProfileFavorites(profile.id),
     getRecentEntries(profile.id, 8),
+    getUserReviews(profile.id),
+  ]);
+  const [following, likedReviewIds] = await Promise.all([
+    isFollowing(viewer?.id, profile.id),
+    getLikedReviewIds(
+      viewer?.id,
+      reviews.slice(0, 3).map((r) => r.id),
+    ),
   ]);
   const isOwn = viewer?.id === profile.id;
   const name = profile.display_name || profile.username;
@@ -92,6 +104,10 @@ export default async function ProfilePage({ params }: Props) {
             >
               {t("edit")}
             </Link>
+          ) : viewer ? (
+            <div className="self-start lg:self-end">
+              <FollowButton targetId={profile.id} following={following} />
+            </div>
           ) : null}
         </Container>
       </section>
@@ -109,7 +125,12 @@ export default async function ProfilePage({ params }: Props) {
               />
             ))}
             {SOCIAL_STATS.map((key) => (
-              <Stat key={key} label={t(`stats.${key}`)} value={stats[key as keyof ProfileStats]} />
+              <Stat
+                key={key}
+                label={t(`stats.${key}`)}
+                value={stats[key as keyof ProfileStats]}
+                href={key === "lists" ? undefined : `/${profile.username}/${key}`}
+              />
             ))}
           </div>
         </Container>
@@ -164,6 +185,36 @@ export default async function ProfilePage({ params }: Props) {
           ) : null}
         </Container>
       </section>
+
+      {/* ------------------------------------------------------------- Reviews */}
+      {reviews.length > 0 ? (
+        <section aria-labelledby="profile-reviews" className="border-t border-line">
+          <Container className="py-16 sm:py-20">
+            <div className="mb-2 flex items-end justify-between gap-4 border-b border-line pb-4">
+              <h2 id="profile-reviews" className="eyebrow">
+                {t("reviewsTitle")}
+              </h2>
+              <Link
+                href={`/${profile.username}/reviews`}
+                className="link-underline text-xs text-paper-muted"
+              >
+                {t("viewAllReviews")}
+              </Link>
+            </div>
+            <div className="flex max-w-3xl flex-col divide-y divide-line">
+              {reviews.slice(0, 3).map((review) => (
+                <ReviewCard
+                  key={review.id}
+                  review={review}
+                  liked={likedReviewIds.has(review.id)}
+                  viewerId={viewer?.id ?? null}
+                  showFragrance
+                />
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       {/* --------------------------------------------------------------- Diary */}
       <section aria-labelledby="diary" className="border-t border-line">
